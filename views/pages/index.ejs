@@ -19,8 +19,8 @@
                 <p>"I saw it happen." I proceeded to tell him.  "We have chanced to come in for the thick of it," said I, "and that is all."</p>
 
                 <p>"What is that 
-		<% if(chosen==true){ %><a href = '/'>flicker</a><% } %> 
-		in the sky?" he asked abruptly.</p>
+		        <% if(anarchy==true){ %><a href = '/anarchist-newspaper' id="anarchy">flicker</a><% } %> 
+		        in the sky?" he asked abruptly.</p>
 
                 <p>I told him it was the heliograph signalling--that it was the sign of human help and effort in the sky.</p>
 
@@ -37,6 +37,15 @@
     <footer>
         <% include ../partials/footer %>
     </footer>
-    
+    <script>
+        $(document).ready(function() {
+            console.log('here');
+
+            $('#anarchy').click(function(e) {
+                e.preventDefault();
+            });
+
+        });
+    </script>
 </body>
 </html>

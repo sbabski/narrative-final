@@ -4,7 +4,8 @@ const bodyParser = require('body-parser');
 const app = express();
 var db;
 
-var chosen = false;
+var autopsy = false;
+var future = false;
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
@@ -22,12 +23,12 @@ MongoClient.connect('mongodb://localhost:27017/', (err, database) => {
 
 app.get('/', (req, res) => {
   res.render('pages/index', {
-    chosen: chosen
+    autopsy = true;
   });
 });
 
 app.get('/autopsy-report', (req, res) => {
-  chosen = true;
+  autopsy = true;
   res.render('pages/autopsy-report');
 });
 
