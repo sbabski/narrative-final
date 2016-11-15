@@ -2,7 +2,9 @@ const MongoClient = require('mongodb').MongoClient;
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-var db
+var db;
+
+var chosen = false;
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
@@ -19,19 +21,16 @@ MongoClient.connect('mongodb://localhost:27017/', (err, database) => {
 });
 
 app.get('/', (req, res) => {
-
-  var drinks = [
-    { name: 'Bloody Mary', drunkness: 3 },
-    { name: 'Martini', drunkness: 5 },
-    { name: 'Scotch', drunkness: 10 }
-  ];
-  var tagline = "any code";
   res.render('pages/index', {
-    drinks: drinks,
-    tagline: tagline
+    chosen: chosen
   });
 });
 
 app.get('/autopsy-report', (req, res) => {
+  chosen = true;
   res.render('pages/autopsy-report');
+});
+
+app.get('/anarchist-newspaper', (req, res) => {
+  res.render('pages/anarchist-newspaper');
 });
