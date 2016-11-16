@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('client-sessions');
 const app = express();
-var db;
+var db, user;
 
 var anarchy = false;
 var future = false;
@@ -30,6 +30,10 @@ MongoClient.connect('mongodb://localhost:27017/', (err, database) => {
 
 app.get('/', (req, res) => {
   if(req.session && req.session.user) {
+    db.collection('users').findOne({name: req.session.user}, (err, result) => {
+      if(err) return console.log(err)
+      user = result
+    });
     res.render('pages/index', {
       anarchy: anarchy
     });
@@ -43,6 +47,10 @@ app.get('/', (req, res) => {
     //return console.log('trying login');
     res.render('pages/login');
   }
+});
+
+app.post('/', (req, res) => {
+  console.log(req.body);
 });
 
 app.get('/autopsy-report', (req, res) => {
