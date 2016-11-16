@@ -39,7 +39,7 @@ app.get('/', (req, res) => {
       anarchy: anarchy
     });
   } else {
-    var users = db.collection('users').find().toArray( (err, results) => {
+    users.find().toArray( (err, results) => {
       if (err) return console.log(err)
       //if new user, create db element
       //else, just load data
@@ -52,6 +52,7 @@ app.get('/', (req, res) => {
 
 app.post('/login', (req, res) => {
   var rb = req.body;
+  rb.name = rb.name.toLowerCase();
   rb.future = false;
   rb.autopsy = false;
   users.save(rb, (err, result) => {
@@ -59,6 +60,11 @@ app.post('/login', (req, res) => {
     console.log('saved to database')
     res.redirect('/');
   });
+  users.findOne({name: rb.name}, (err, result) => {
+    if(err) return console.log(err)
+    console.log(result)
+  });
+
 });
 
 app.get('/dropdb', (req, res) => {
