@@ -60,8 +60,11 @@ app.post('/login', (req, res) => {
     console.log('saved to database')
     res.redirect('/');
   });
-  users.findOne({name: rb.name}, (err, result) => {
+  users.findOne({name: rb.name + 'e'}, (err, result) => {
     if(err) return console.log(err)
+    if(!result) {
+      console.log('a');
+    }
     console.log(result)
   });
 
