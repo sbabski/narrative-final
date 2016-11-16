@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const app = express();
 var db;
 
-var autopsy = false;
+var anarchy = false;
 var future = false;
 
 app.use(bodyParser.json())
@@ -23,12 +23,12 @@ MongoClient.connect('mongodb://localhost:27017/', (err, database) => {
 
 app.get('/', (req, res) => {
   res.render('pages/index', {
-    autopsy = true;
+    anarchy: anarchy
   });
 });
 
 app.get('/autopsy-report', (req, res) => {
-  autopsy = true;
+  anarchy = true;
   res.render('pages/autopsy-report');
 });
 
