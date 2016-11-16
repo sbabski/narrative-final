@@ -22,6 +22,10 @@ MongoClient.connect('mongodb://localhost:27017/', (err, database) => {
 });
 
 app.get('/', (req, res) => {
+  var users = db.collection('users').find().toArray( (err, results) => {
+    if (err) return console.log(err)
+    console.log(results)
+  })
   res.render('pages/index', {
     anarchy: anarchy
   });
