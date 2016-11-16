@@ -71,6 +71,11 @@ app.get('/dropdb', (req, res) => {
   res.redirect('/');
 });
 
+app.get('/logout', (req, res) => {
+  req.session.reset();
+  res.redirect('/');
+});
+
 app.get('/autopsy-report', (req, res) => {
   anarchy = true;
   res.render('pages/autopsy-report');

@@ -40,36 +40,32 @@
       <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
       <script src="/vendor/html2canvas.js"></script>
       <script src="/vendor/glitch.js"></script>
+      <% if()
       <script>
           $(document).ready(function() {
               console.log(this);
 
               $('#anarchy').click(function(e) {
                   e.preventDefault();
-                  //glitch
-                  //pop up new window
                   url = this.href;
                   $('body').glitch('replace', {
                     amount: 10
                   });
                   setTimeout(function() {
                     var myWin = window.open(url, 'Chat', 'width=400, height=400');
-                    //if(myWin.closed == false) {
-                    //  myWin.close();
-                    //}
-                    console.log(myWin);
-                    //window.open(url, 'Chat', 'width=400, height=400');
+                    if(myWin) {
+                        if(myWin.closed == false) {
+                          myWin.close();
+                        }
+                        window.open(url, 'Chat', 'width=400, height=400');
+                    } else {
+                        //popup blocked, do something else
+                        console.log('blocked');
+                    }
                   }, 3000);
                   return false;
                   //make sure only happens once
               });
-
-              function closePopupIfOpen(){
-                if(typeof(window['Chat']) != 'undefined' && !window['Chat'].closed){
-                  console.log('c')
-                  window['Chat'].close();
-                }
-              }
           });
       </script>
 </body>
