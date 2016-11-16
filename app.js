@@ -1,6 +1,7 @@
 const MongoClient = require('mongodb').MongoClient;
 const express = require('express');
 const bodyParser = require('body-parser');
+const session = require('client-sessions');
 const app = express();
 var db;
 
@@ -10,6 +11,12 @@ var future = false;
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static('public'))
+app.use(session({
+  cookieName: 'session',
+  secret: 'tom-waits-is-grits',
+  duration: 30 * 60 * 1000,
+  activeDuration: 5 * 60 * 1000
+}));
 app.set('view engine', 'ejs')
 
 MongoClient.connect('mongodb://localhost:27017/', (err, database) => {
@@ -22,13 +29,20 @@ MongoClient.connect('mongodb://localhost:27017/', (err, database) => {
 });
 
 app.get('/', (req, res) => {
-  var users = db.collection('users').find().toArray( (err, results) => {
-    if (err) return console.log(err)
-    console.log(results)
-  })
-  res.render('pages/index', {
-    anarchy: anarchy
-  });
+  if(req.session && req.session.user) {
+    res.render('pages/index', {
+      anarchy: anarchy
+    });
+  } else {
+    //var users = db.collection('users').find().toArray( (err, results) => {
+      //if (err) return console.log(err)
+      //if new user, create db element
+      //else, just load data
+      //console.log(results)
+    //});
+    //return console.log('trying login');
+    res.render('pages/login');
+  }
 });
 
 app.get('/autopsy-report', (req, res) => {
