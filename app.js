@@ -30,8 +30,11 @@ MongoClient.connect('mongodb://localhost:27017/', (err, database) => {
 });
 
 app.get('/', (req, res) => {
+  users.find().toArray( (req, res) => {
+    console.log(res);
+  });
   if(req.session && req.session.user) {
-    console.log(req.session.user);
+    //console.log(req.session.user);
     res.render('pages/index', {
       anarchy: anarchy
     });
@@ -43,19 +46,20 @@ app.get('/', (req, res) => {
 app.post('/login', (req, res) => {
   var rb = req.body;
   rb.name = rb.name.toLowerCase();
-  users.findOne({name: rb.name + 'e'}, (err, result) => {
+  users.findOne({name: rb.name}, (err, result) => {
     if(err) return console.log(err)
     if(!result) {
       rb.future = false;
       rb.autopsy = false;
+      console.log('here');
       users.save(rb, (err, result) => {
         if(err) return console.log(err)
         console.log('saved to database')
-        res.redirect('/');
       });
       req.session.user = rb;
     } else {
-      req.session.user = result;
+     console.log('here 2');
+     req.session.user = result;
     }
     res.redirect('/');
   });

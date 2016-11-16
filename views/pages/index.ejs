@@ -19,7 +19,7 @@
                 <p>"I saw it happen." I proceeded to tell him.  "We have chanced to come in for the thick of it," said I, "and that is all."</p>
 
                 <p>"What is that 
-		        <% if(anarchy==true){ %><a href = '/anarchist-newspaper' id="anarchy">flicker</a><% } %> 
+		        <% if(anarchy==true){ %><a href = '/chat' id="anarchy">flicker</a><% } %> 
 		        in the sky?" he asked abruptly.</p>
 
                 <p>I told him it was the heliograph signalling--that it was the sign of human help and effort in the sky.</p>
@@ -37,12 +37,12 @@
     <footer>
         <% include ../partials/footer %>
     </footer>
-      <script src="\vendor\html2canvas.js"></script>
-      <script src="\vendor\glitch.js"></script>
+      <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+      <script src="/vendor/html2canvas.js"></script>
+      <script src="/vendor/glitch.js"></script>
       <script>
           $(document).ready(function() {
               console.log(this);
-              var myWin;
 
               $('#anarchy').click(function(e) {
                   e.preventDefault();
@@ -53,12 +53,12 @@
                     amount: 10
                   });
                   setTimeout(function() {
-                    console.log(typeof(myWin));
-                    myWin = window.open(url, 'Chat', 'width=400, height=400');
-                    if(myWin.closed == false) {
-                      myWin.close();
-                    }
-                    window.open(url, 'Chat', 'width=400, height=400');
+                    var myWin = window.open(url, 'Chat', 'width=400, height=400');
+                    //if(myWin.closed == false) {
+                    //  myWin.close();
+                    //}
+                    console.log(myWin);
+                    //window.open(url, 'Chat', 'width=400, height=400');
                   }, 3000);
                   return false;
                   //make sure only happens once
