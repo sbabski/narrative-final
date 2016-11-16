@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
     console.log(res);
   });
   if(req.session && req.session.user) {
-    //console.log(req.session.user);
+    console.log(req.session.user);
     res.render('pages/index', {
       anarchy: anarchy
     });
