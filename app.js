@@ -31,21 +31,11 @@ MongoClient.connect('mongodb://localhost:27017/', (err, database) => {
 
 app.get('/', (req, res) => {
   if(req.session && req.session.user) {
-    users.findOne({name: req.session.user}, (err, result) => {
-      if(err) return console.log(err)
-      user = result
-    });
+    console.log(req.session.user);
     res.render('pages/index', {
       anarchy: anarchy
     });
   } else {
-    users.find().toArray( (err, results) => {
-      if (err) return console.log(err)
-      //if new user, create db element
-      //else, just load data
-      console.log(results)
-    });
-    //return console.log('trying login');
     res.render('pages/login');
   }
 });
@@ -53,19 +43,21 @@ app.get('/', (req, res) => {
 app.post('/login', (req, res) => {
   var rb = req.body;
   rb.name = rb.name.toLowerCase();
-  rb.future = false;
-  rb.autopsy = false;
-  users.save(rb, (err, result) => {
-    if(err) return console.log(err)
-    console.log('saved to database')
-    res.redirect('/');
-  });
   users.findOne({name: rb.name + 'e'}, (err, result) => {
     if(err) return console.log(err)
     if(!result) {
-      console.log('a');
+      rb.future = false;
+      rb.autopsy = false;
+      users.save(rb, (err, result) => {
+        if(err) return console.log(err)
+        console.log('saved to database')
+        res.redirect('/');
+      });
+      req.session.user = rb;
+    } else {
+      req.session.user = result;
     }
-    console.log(result)
+    res.redirect('/');
   });
 
 });
