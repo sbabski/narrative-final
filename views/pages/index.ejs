@@ -37,19 +37,40 @@
     <footer>
         <% include ../partials/footer %>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
-    <script>
-        $(document).ready(function() {
-            console.log('here');
+      <script src="\vendor\html2canvas.js"></script>
+      <script src="\vendor\glitch.js"></script>
+      <script>
+          $(document).ready(function() {
+              console.log(this);
+              var myWin;
 
-            $('#anarchy').click(function(e) {
-                e.preventDefault();
-                //glitch
-                //pop up new window
-                //make sure only happens once
-            });
+              $('#anarchy').click(function(e) {
+                  e.preventDefault();
+                  //glitch
+                  //pop up new window
+                  url = this.href;
+                  $('body').glitch('replace', {
+                    amount: 10
+                  });
+                  setTimeout(function() {
+                    console.log(typeof(myWin));
+                    myWin = window.open(url, 'Chat', 'width=400, height=400');
+                    if(myWin.closed == false) {
+                      myWin.close();
+                    }
+                    window.open(url, 'Chat', 'width=400, height=400');
+                  }, 3000);
+                  return false;
+                  //make sure only happens once
+              });
 
-        });
-    </script>
+              function closePopupIfOpen(){
+                if(typeof(window['Chat']) != 'undefined' && !window['Chat'].closed){
+                  console.log('c')
+                  window['Chat'].close();
+                }
+              }
+          });
+      </script>
 </body>
 </html>
