@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <% include ../partials/head %>
 </head>
 <body class="container">
 
@@ -43,7 +42,7 @@
       <script>
 
         $(document).ready(function() {
-            var anarchy = <%- JSON..stringify(anarchy) %>;
+            var anarchy = <%- JSON.stringify(anarchy) %>;
 
             $('#anarchy').click(function(e) {
               e.preventDefault();
@@ -78,10 +77,10 @@
             $('body').prepend(canvas);
 
             img = new Image();
-            img.src = 'public/images/cypher.jpg';
+            img.src = '/images/cypher.jpg';
             img.onload = function() {
               resizing();
-              $(canvas).on('click', checkPos);
+              $(canvas).on('mouseover', checkPos);
             };
             $(window).resize(resizing);
 
@@ -90,11 +89,12 @@
                 var left = scale(shapes[i][0]);
                 var right = left + scale(shapes[i][2]);
                 var top = scale(shapes[i][1]);
+                console.log('here');
                 var bottom = top + scale(shapes[i][3]);
                 if(evt.clientX > left && evt.clientX < right) {
                   if(evt.clientY > top && evt.clientY < bottom) {
                     console.log('click')
-                    $(location).attr('href', '/chat');
+                    //$(location).attr('href', '/chat');
                   }
                 }
               }
