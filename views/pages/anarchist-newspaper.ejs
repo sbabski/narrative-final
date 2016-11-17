@@ -41,16 +41,16 @@
             amount: 10
           });
           setTimeout(function() {
-            var chat = window.open(url, 'Chat', 'width=400, height=400');
+            var chat = window.open('/chat', 'Chat', 'width=400, height=400');
             if(chat) {
                 if(chat.closed == false) {
                   chat.close();
                 }
-                window.open(url, 'Chat', 'width=400, height=400');
+                window.open('/chat', 'Chat', 'width=400, height=400');
             } else {
                 console.log('blocked');
             }
-          }, 3000);
+          }, 1000);
         }, 3000);
       }
     });
