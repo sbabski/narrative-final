@@ -6,23 +6,44 @@
     <% include ../partials/head %>
 </head>
 <body class="container">
-    <main>
-        <div class="row">
-          <div class="eight columns offset-by-two">
-            <h1 class="center-text">Cypher</h1>
-            <h5 class="center-text">by Evan Anderson, Sarah Babski, and Nico Hall</h5>
-
+  <main>
+      <div class="row">
+        <div class="eight columns offset-by-two">
+          <h1 class="center-text">Cypher</h1>
+          <h5 class="center-text">by Evan Anderson, Sarah Babski, and Nico Hall</h5>
+          <div class="note">
             <p>Detective,</p>
             <p>Here’s the cypher our boys found on that stiff out in the woods outside of town. Nobody at the department can make heads or tails of it. We know you have some background in cryptography, maybe you can have a crack at it?</p>
-            <p><b>-Officer M</b></p>
-
-            <h4 class="center-text">Enter your name to begin:</h4>
-            <form action="/login" method="POST">
-              <input type="text" name="name">
-              <button type="submit">Submit</button>
-            </form>
+            <p><em>-Officer M</em></p>
           </div>
+
+          <h4 class="center-text">Enter your name to begin:</h4>
+          <form class="center-text" action="/login" method="POST">
+            <input type="text" name="name">
+            <button type="submit">Submit</button>
+          </form>
         </div>
-    </main>
+      </div>
+  </main>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function() {
+      //test pop-up
+      var popup = window.open(winPath,winName,winFeature,true);
+      setTimeout( function() {
+        if(!popup || popup.outerHeight === 0) {
+          //First Checking Condition Works For IE & Firefox
+          //Second Checking Condition Works For Chrome
+          alert("Popup Blocker is enabled! Please add this site to your exception list.");
+          window.location.href = 'warning.html';
+        } else {
+          //Popup Blocker Is Disabled
+          window.open('','_self');
+          window.close();
+        } 
+      }, 25);
+
+    });
+  </script>
 </body>
 </html>
