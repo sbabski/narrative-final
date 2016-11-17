@@ -63,7 +63,12 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/autopsy-report', (req, res) => {
-  req.session.user = updateUserData(req.session.user['name'], {anarchy: true});
+  u = updateUserData(req.session.user['name'], {anarchy: true});
+  req.login(u, (err) => {
+    if(err) console.log(err)
+    console.log('after')
+    console.log(req.session.user)
+  });
   res.render('pages/autopsy-report');
 });
 
