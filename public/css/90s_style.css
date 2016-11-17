@@ -16,9 +16,12 @@ body {
 }
 
 table {
-  margin: 0 auto;
+  margin: 50px auto;
   width: 80%;
 }
 img.full {
   width: 100%;
+}
+.demargin {
+  margin: 0;
 }
