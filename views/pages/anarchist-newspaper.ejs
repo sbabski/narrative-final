@@ -30,8 +30,14 @@
   <footer>
     <% include ../partials/footer %>
   </footer>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+  <script src="/vendor/html2canvas.js"></script>
+  <script src="/vendor/glitch.js"></script>
   <script>
     $(document).ready(function() {
+      if(<%- JSON.stringify(anarchy) %> == false) {
+        console.log('false');
+      }
       //check chat1 var
       //set timeout
       //glitch

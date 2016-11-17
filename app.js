@@ -112,6 +112,3 @@ function updateUserData(username, data) {
       if(err) return console.log(err)
     });
 }
-
-
-//click flicker, go to page, if conv1 = false: flicker and open chat, set conv1 = true
