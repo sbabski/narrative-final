@@ -71,7 +71,7 @@ app.get('/autopsy-report', (req, res) => {
       if(err) return console.log(err)
       req.session.user = console.log(doc.value)
     });*/
-  updateUserData({anarchy: true});
+  updateUserData(req, {anarchy: true});
   res.render('pages/autopsy-report');
 });
 
@@ -93,7 +93,7 @@ app.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
-function updateUserData(data) {
+function updateUserData(req, data) {
   users.findOneAndUpdate(
     {name: req.session.user['name']},
     {$set: data},
