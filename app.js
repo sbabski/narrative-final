@@ -32,10 +32,9 @@ app.get('/', (req, res) => {
   if(req.session && req.session.user) {
     users.findOne({name: req.session.user.name}, (err, u) => {
       if(err) console.log(err);
-      console.log(u)
-    })
-    res.render('pages/index', {
-      anarchy: req.session.user['anarchy']
+      res.render('pages/index', {
+        anarchy: u.anarchy
+      });
     });
   } else {
     res.render('pages/login');
@@ -83,6 +82,10 @@ app.get('/anarchist-newspaper', (req, res) => {
 
 app.get('/myositis', (req, res) => {
   res.render('pages/myositis');
+});
+
+app.get('/chat', (req, res) => {
+  res.render('pages/chat');
 });
 
 app.get('/dropdb', (req, res) => {
