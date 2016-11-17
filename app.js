@@ -49,6 +49,7 @@ app.post('/login', (req, res) => {
     if(!result) {
       rb.future = false;
       rb.anarchy = false;
+      rb.convo1 = false;
       console.log('here');
       users.save(rb, (err, result) => {
         if(err) return console.log(err)
@@ -65,19 +66,24 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/autopsy-report', (req, res) => {
-  //u = updateUserData(req.session.user['name'], {anarchy: true});
-  users.findOneAndUpdate(
-    {name: req.session.user['name']},
-    {$set: {anarchy: true}},
-    {returnOriginal: false},
-    (err, result) => {
-      if(err) return console.log(err)
-    });
+  updateUserData(req.session.user['name'], {anarchy: true});
   res.render('pages/autopsy-report');
 });
 
 app.get('/anarchist-newspaper', (req, res) => {
-  res.render('pages/anarchist-newspaper');
+  if(req.session && req.session.user) {
+    users.findOne({name: req.session.user.name}, (err, u) => {
+      if(err) console.log(err);
+      res.render('pages/anarchist-newspaper', {
+        convo: u.convo1
+      });
+      if(u.convo1 == false) {
+        updateUserData(req.session.user['name'], {convo1: true});
+      }
+    });
+  } else {
+    res.redirect('/');
+  }
 });
 
 app.get('/myositis', (req, res) => {
@@ -102,10 +108,8 @@ function updateUserData(username, data) {
   users.findOneAndUpdate(
     {name: username},
     {$set: data},
-    {returnOriginal: false},
     (err, result) => {
       if(err) return console.log(err)
-      return result.value
     });
 }
 
