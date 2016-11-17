@@ -29,13 +29,12 @@
   <script>
     $(document).ready(function() {
       //test pop-up
-      var popup = window.open(winPath,winName,winFeature,true);
+      var popup = window.open('','_self');
       setTimeout( function() {
         if(!popup || popup.outerHeight === 0) {
           //First Checking Condition Works For IE & Firefox
           //Second Checking Condition Works For Chrome
-          alert("Popup Blocker is enabled! Please add this site to your exception list.");
-          window.location.href = 'warning.html';
+          console.log('enabled');
         } else {
           //Popup Blocker Is Disabled
           window.open('','_self');
