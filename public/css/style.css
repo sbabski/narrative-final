@@ -1,3 +1,6 @@
 .center-text {
   text-align: center;
 }
+.popup {
+  display: none;
+}

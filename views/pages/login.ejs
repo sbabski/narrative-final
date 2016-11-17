@@ -17,28 +17,30 @@
             <p><em>-Officer M</em></p>
           </div>
 
-          <h4 class="center-text">Enter your name to begin:</h4>
+          <h5 class="center-text">Enter your name to begin:</h5>
           <form class="center-text" action="/login" method="POST">
             <input type="text" name="name">
             <button type="submit">Submit</button>
           </form>
+	  <div class="popup">
+	    <p>Please disable your pop-up blocker in the address bar above.</p>
+	  </div>
         </div>
       </div>
   </main>
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
   <script>
     $(document).ready(function() {
-      //test pop-up
-      var popup = window.open('','_self');
+      var popup = window.open('','', 'width=1,height=1');
       setTimeout( function() {
         if(!popup || popup.outerHeight === 0) {
           //First Checking Condition Works For IE & Firefox
           //Second Checking Condition Works For Chrome
+          $('.popup').show();
           console.log('enabled');
         } else {
           //Popup Blocker Is Disabled
-          window.open('','_self');
-          window.close();
+          popup.close();
         } 
       }, 25);
 
