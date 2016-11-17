@@ -41,11 +41,12 @@
             });*/
 
 
-            var canvas, ctx, img, shapes, width;
+            var canvas, ctx, img, width, shapes, urls;
 
+            urls = ['/autopsy-report', '/anarchist-newspaper'];
             //values for when canvas width is 1000
             shapes = [[610, 120, 325, 50], [400, 190, 60, 65]]
-            //if anarchy, then do 2nd.
+            shapes = buildRevisedShapes();
 
             canvas = document.createElement('canvas');
             ctx = canvas.getContext('2d');
@@ -55,9 +56,15 @@
             img.src = '/images/cypher.jpg';
             img.onload = function() {
               resizing();
-              $(canvas).on('mouseover', checkPos);
+              $(canvas).on('click', checkPos);
             };
             $(window).resize(resizing);
+
+            function buildRevisedShapes() {
+                result = [shapes[0]];
+                if (anarchy) result.push(shapes[1]);
+                return result;
+            }
 
             function checkPos(evt) {
               for(var i = 0; i < shapes.length; i++) {
@@ -68,8 +75,8 @@
                 var bottom = top + scale(shapes[i][3]);
                 if(evt.clientX > left && evt.clientX < right) {
                   if(evt.clientY > top && evt.clientY < bottom) {
-                    console.log('click')
-                    //$(location).attr('href', '/chat');
+                    console.log(urls[i]);
+                    $(location).attr('href', urls[i]);
                   }
                 }
               }
