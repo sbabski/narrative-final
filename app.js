@@ -30,7 +30,7 @@ MongoClient.connect('mongodb://localhost:27017/', (err, database) => {
 
 app.get('/', (req, res) => {
   if(req.session && req.session.user) {
-    users.findOne({name: req.session.user.name}, (err, u) {
+    users.findOne({name: req.session.user.name}, (err, u) => {
       if(err) console.log(err);
       console.log(u)
     })
