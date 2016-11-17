@@ -98,6 +98,9 @@ app.get('/chat', (req, res) => {
 });
 
 app.get('/dropdb', (req, res) => {
+  if(req.session && req.session.user) {
+    req.session.reset();
+  }
   db.collection('users').drop();
   res.redirect('/');
 });
