@@ -63,7 +63,7 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/autopsy-report', (req, res) => {
-  req.session.user = updateUserData({anarchy: true});
+  req.session.user = updateUserData(req.session.user['name'], {anarchy: true});
   res.render('pages/autopsy-report');
 });
 
@@ -85,9 +85,9 @@ app.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
-function updateUserData(data) {
+function updateUserData(username, data) {
   users.findOneAndUpdate(
-    {name: req.session.user['name']},
+    {name: username},
     {$set: data},
     {returnOriginal: false},
     (err, result) => {
