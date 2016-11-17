@@ -11,8 +11,9 @@
 <body style="margin: 0">
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
   <script>
-    var canvas, ctx, img, shapes;
+    var canvas, ctx, img, shapes, width;
 
+    //values for when canvas width is 1000
     shapes = [[610, 120, 325, 50], [400, 190, 60, 65]]
 
     canvas = document.createElement('canvas');
@@ -21,18 +22,38 @@
 
     img = new Image();
     img.src = 'public/images/cypher.jpg';
-    img.onload = resizing;
+    img.onload = function() {
+      resizing();
+      $(canvas).on('click', checkPos);
+    };
     $(window).resize(resizing);
 
+    function checkPos(evt) {
+      for(var i = 0; i < shapes.length; i++) {
+        var left = scale(shapes[i][0]);
+        var right = left + scale(shapes[i][2]);
+        var top = scale(shapes[i][1]);
+        var bottom = top + scale(shapes[i][3]);
+        if(evt.clientX > left && evt.clientX < right) {
+          if(evt.clientY > top && evt.clientY < bottom) {
+            console.log('click')
+          }
+        }
+      }
+    }
+
+    function scale(val) {
+      return val * width / 1000;
+    }
+
     function drawSquare(arr) {
-      console.log(arr)
-      ctx.rect(arr[0], arr[1], arr[2], arr[3]);
+      ctx.rect(scale(arr[0]), scale(arr[1]), scale(arr[2]), scale(arr[3]));
       ctx.stroke();
     }
 
     function resizing() {
-      //canvas.width = document.body.clientWidth;
-      canvas.width = 1000;
+      canvas.width = document.body.clientWidth;
+      width = canvas.width;
       canvas.height = img.height/img.width * canvas.width;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
