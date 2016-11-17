@@ -63,12 +63,15 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/autopsy-report', (req, res) => {
-  u = updateUserData(req.session.user['name'], {anarchy: true});
-  req.login(u, (err) => {
-    if(err) console.log(err)
-    console.log('after')
-    console.log(req.session.user)
-  });
+  //u = updateUserData(req.session.user['name'], {anarchy: true});
+  users.findOneAndUpdate(
+    {name: req.session.user['name']},
+    {$set: {anarchy: true}},
+    {returnOriginal: false},
+    (err, result) => {
+      if(err) return console.log(err)
+      req.session.user = result.value;
+    });
   res.render('pages/autopsy-report');
 });
 
