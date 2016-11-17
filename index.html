@@ -8,59 +8,43 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
     <link rel="stylesheet" href="file:///C:/Users/Sarah/Desktop/narrative-final/public/css/style.css">
 </head>
-<body style="margin: 0">
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
-  <script>
-    var canvas, ctx, img, shapes, width;
+<body class="container anarchist">
 
-    //values for when canvas width is 1000
-    shapes = [[610, 120, 325, 50], [400, 190, 60, 65]]
+  <div class="row spaced">
+    <div class="u-full-width center-text">
+      <h1 class="title">
+        <span>THE</span>
+        <img src="public/images/anarchist_star.png">
+        <span class="right">GITATOR</span>
+      </h1>
+    </div>
+  </div>
 
-    canvas = document.createElement('canvas');
-    ctx = canvas.getContext('2d');
-    $('body').prepend(canvas);
+  <div class="row">
+    <div class="six columns">
+      <span>Oct. 26, 2037</span>
+    </div>
+    <div class="six columns">
+      <span class="u-pull-right">16 Years of Anarchist News for the People</span>
+      <span class="u-cf"></span>
+    </div>
+  </div>
 
-    img = new Image();
-    img.src = 'public/images/cypher.jpg';
-    img.onload = function() {
-      resizing();
-      $(canvas).on('click', checkPos);
-    };
-    $(window).resize(resizing);
+  <div class="row spaced">
+    <div class="u-full-width center-text">
+      <h4>DRUG ENHANCED POLICE ATTACK CIVILIAN PROTESTERS</h4>
+      <img class="full" src="public/images/z33BTXy.jpg">
+      <p>>>> St. Louis police, aided by genetically enhanced soldiers, led a brutal crackdown on anti-government protesters late Wednesday. 
+      <br><br>
+      The protesters, speaking up against previous police crackdowns, deep-seated political corruption, and widespread economic strife in the city, were marching down Washington Ave. when several police trucks moved in suddenly to block their path. Several squads of genetically enhanced police - identifiable by their facemasks and abnormally muscular builds - emerged from the trucks, heavily armed. They immediately entered the crowd and began beating and dragging away the protestors.
+      <br><br>
+      Monitors from The Agitator who were present at the scene estimate about 150 to 200 protesters were arrested before the crowd dispersed. 
+      <br><br>
+      “I watched the pigs wade into the crowd and hit freedom fighters with their batons, their fists, and their rifles.” said Agitator correspondent F0X112 (alias used for anonymity), ”Nobody was read their rights, as usual.”
+      <br><br>
+      The Agitator has reported previously on various drug-enhanced police forces responding to protests and other instances of direct action against the state. The Agitator staff has several theories concerning the nature and origin of these enhanced forces - which we’ve taken to calling “hogs” - but we plan to do more investigation before we publish a full report of our findings. <<<</p>
+    </div>
+  </div>
 
-    function checkPos(evt) {
-      for(var i = 0; i < shapes.length; i++) {
-        var left = scale(shapes[i][0]);
-        var right = left + scale(shapes[i][2]);
-        var top = scale(shapes[i][1]);
-        var bottom = top + scale(shapes[i][3]);
-        if(evt.clientX > left && evt.clientX < right) {
-          if(evt.clientY > top && evt.clientY < bottom) {
-            console.log('click')
-          }
-        }
-      }
-    }
-
-    function scale(val) {
-      return val * width / 1000;
-    }
-
-    function drawSquare(arr) {
-      ctx.rect(scale(arr[0]), scale(arr[1]), scale(arr[2]), scale(arr[3]));
-      ctx.stroke();
-    }
-
-    function resizing() {
-      canvas.width = document.body.clientWidth;
-      width = canvas.width;
-      canvas.height = img.height/img.width * canvas.width;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
-      for(var i = 0; i < shapes.length; i++) {
-        drawSquare(shapes[i]);
-      }
-    }
-  </script>
 </body>
 </html>
