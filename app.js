@@ -5,7 +5,6 @@ const session = require('client-sessions');
 const app = express();
 var db, currentUser, users;
 
-var anarchy = false;
 var future = false;
 
 app.use(bodyParser.json())
@@ -30,9 +29,6 @@ MongoClient.connect('mongodb://localhost:27017/', (err, database) => {
 });
 
 app.get('/', (req, res) => {
-  users.find().toArray( (req, res) => {
-    //console.log(res);
-  });
   if(req.session && req.session.user) {
     console.log(req.session.user);
     res.render('pages/index', {
@@ -67,15 +63,15 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/autopsy-report', (req, res) => {
-  req.session.user['anarchy'] = true;
-  users.findOneAndUpdate(
+  /*users.findOneAndUpdate(
     {name: req.session.user['name']}, 
     {$set: {anarchy: true}},
     {returnOriginal: false},
     (err, doc) => {
       if(err) return console.log(err)
       req.session.user = console.log(doc.value)
-    });
+    });*/
+  updateUserData({anarchy: true});
   res.render('pages/autopsy-report');
 });
 
@@ -96,3 +92,17 @@ app.get('/logout', (req, res) => {
   req.session.reset();
   res.redirect('/');
 });
+
+function updateUserData(data) {
+  users.findOneAndUpdate(
+    {name: req.session.user['name']},
+    {$set: data},
+    {returnOriginal: false},
+    (err, result) => {
+      if(err) return console.log(err)
+      req.session.user = result.value
+    });
+}
+
+
+//click flicker, go to page, if conv1 = false: flicker and open chat, set conv1 = true
