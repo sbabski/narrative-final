@@ -2,6 +2,7 @@ const MongoClient = require('mongodb').MongoClient;
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('client-sessions');
+const dialogue = require('dialoguejs');
 const app = express();
 var db, currentUser, users;
 
@@ -91,6 +92,7 @@ app.get('/myositis', (req, res) => {
 });
 
 app.get('/chat', (req, res) => {
+  console.log(dialogue.load('convo', 'convo.txt'));
   res.render('pages/chat');
 });
 

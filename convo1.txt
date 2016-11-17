@@ -1,0 +1,10 @@
+0 Hello there. We’ve been expecting you. -> 1
+1 What’s going on here? -> 2
+2 You have found a way out of the illusion of time. Now you are witness for your race. [3,4,5]
+3 This can't be real. How are you doing this? -> 7
+4 Please leave me alone. -> 6
+5 Who are you? -> 6
+6 You cannot get away from your own shadow. [3, 4, 5]
+7 But it is. This is occurring through means far beyond your Y2K world. -> 8
+8 But how do I know that any of this is real?
+9 Here's a start. This man, Layne Thompson.
