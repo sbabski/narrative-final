@@ -66,6 +66,19 @@ app.post('/login', (req, res) => {
 
 });
 
+app.get('/autopsy-report', (req, res) => {
+  anarchy = true;
+  res.render('pages/autopsy-report');
+});
+
+app.get('/anarchist-newspaper', (req, res) => {
+  res.render('pages/anarchist-newspaper');
+});
+
+app.get('/myositis', (req, res) => {
+  res.render('pages/myositis');
+});
+
 app.get('/dropdb', (req, res) => {
   db.collection('users').drop();
   res.redirect('/');
@@ -74,13 +87,4 @@ app.get('/dropdb', (req, res) => {
 app.get('/logout', (req, res) => {
   req.session.reset();
   res.redirect('/');
-});
-
-app.get('/autopsy-report', (req, res) => {
-  anarchy = true;
-  res.render('pages/autopsy-report');
-});
-
-app.get('/anarchist-newspaper', (req, res) => {
-  res.render('pages/anarchist-newspaper');
 });
