@@ -5,6 +5,9 @@
 
 body {
   background: #ece9d7;
+}
+
+body, button {
   font-family: 'Times New Roman', serif;
   font-size: 14px;
 }
@@ -28,13 +31,18 @@ body {
 .inset b.blue {
   color: blue;
 }
-
-.inset.lower {
+.inset#toRead {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.inset#toSend {
   bottom: 0;
   height: 30%;
 }
 
 button {
+  width: 100%;
+  text-align: left;
   border: none;
   padding: 1%;
   cursor: pointer;

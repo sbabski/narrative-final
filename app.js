@@ -92,8 +92,9 @@ app.get('/myositis', (req, res) => {
 });
 
 app.get('/chat', (req, res) => {
-  console.log(dialogue.load('convo', 'convo.txt'));
-  res.render('pages/chat');
+  res.render('pages/chat', {
+    name: req.session.user.name
+  });
 });
 
 app.get('/dropdb', (req, res) => {

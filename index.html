@@ -8,37 +8,107 @@
     <link rel="stylesheet" href="file:///C:/Users/Sarah/Desktop/narrative-final/public/css/chat_style.css">
 </head>
 <body class="container">
-  <div class="inset">
-    <p><b class="red">Dragonfly439: </b>Hello there. We’ve been expecting you.</p>
+  <div id="toRead" class="inset">
   </div>
-  <div class="inset lower">
-    <button><b class="blue">1: </b> What’s going on here?</button>
+  <div id="toSend" class="inset">
   </div>
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
 <script>
+  convo = [
+    {
+      'a': 'Dragonfly439',
+      'm': 'Hello there. We’ve been expecting you.',
+      'next': [1]
+    },
+    {
+      'a': 'player',
+      'm': 'What is going on here?',
+      'next': [2]
+    },
+    {
+      'a': 'Dragonfly439',
+      'm': 'You have found a way out of the illusion of time. Now you are witness for your race.',
+      'next': [3, 4, 5]
+    },
+    {
+      'a': 'player',
+      'm': 'This can’t be real. How are you doing this?',
+      'next': [7]
+    },
+    {
+      'a': 'player',
+      'm': 'Please leave me alone.',
+      'next': [6]
+    },
+    {
+      'a': 'player',
+      'm': 'Who are you?',
+      'next': [6]
+    },
+    {
+      'a': 'Dragonfly439',
+      'm': 'You cannot get away from your own shadow.',
+      'next': [3, 4, 5]
+    },
+    {
+      'a': 'Dragonfly439',
+      'm': 'But it is. This is occurring through means far beyond your Y2K world.',
+      'next': [8]
+    },
+    {
+      'a': 'player',
+      'm': 'But how do I know that any of this is real?',
+      'next': [9]
+    },
+    {
+      'a': 'Dragonfly439',
+      'm': 'Here’s a start. This man, Layne Thompson.',
+      'next': []
+    }
+  ];
 
-Dragonfly: You have found a way out of the illusion of time. Now you are witness for your race. 
+  var index = 0;
 
-(Player): 
-  - (This can’t be real. How are you doing this?)
-  - (Please leave me alone.)
-  - (Who are you?)
+  $('button').click(sendMessage);
 
-Dragonfly: (Answer to 2/3) – You cannot get away from your own shadow. 
+  AIMessage();
 
-(Player): Repeat 1
-
-Dragonfly: But it is. This is occurring through means far beyond your Y2K world. 
-
-(Player): But how do I know that any of this is real? 
-
-Dragonfly: Here’s a start. This man, Layne Thompson. (Link)
+  function putInRead() {
+    var line = convo[index];
+    var result = '<p><b class="'
+    if(line.a == 'Dragonfly439') {
+      result += 'red">' + line.a;
+    } else {
+      result += 'blue">' + 'name';
+    }
+    result += ': </b>' + line.m + '</p>';
+    $('#toRead').append(result);
+    $('#toRead').scrollTop($('#toRead')[0].scrollHeight);
+  }
+  function putInSend() {
+    var lines = convo[index].next;
+    var result = '';
+    for(var i = 0; i < lines.length; i++) {
+      result += '<button value="' + lines[i] + '"><b class="blue">' + (i + 1) + ': </b>' + convo[lines[i]].m + '</button>';
+    }
+    $res = $(result);
+    $('#toSend').append($res);
+    $res.click(sendMessage);
   }
 
-  $('button').click(function() {
-    console.log('click')
-  });
+  function AIMessage() {
+    putInRead();
+    setTimeout(putInSend, 1000);
+  }
+
+  function sendMessage() {
+    index = $(this).val();
+    $('#toSend').empty();
+    putInRead();
+    index = convo[index].next[0];
+    setTimeout(AIMessage, 2000);
+  }
 </script>
 
 </body>
