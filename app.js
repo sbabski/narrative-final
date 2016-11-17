@@ -63,15 +63,7 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/autopsy-report', (req, res) => {
-  /*users.findOneAndUpdate(
-    {name: req.session.user['name']}, 
-    {$set: {anarchy: true}},
-    {returnOriginal: false},
-    (err, doc) => {
-      if(err) return console.log(err)
-      req.session.user = console.log(doc.value)
-    });*/
-  updateUserData(req, {anarchy: true});
+  req.session.user = updateUserData({anarchy: true});
   res.render('pages/autopsy-report');
 });
 
@@ -93,14 +85,14 @@ app.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
-function updateUserData(req, data) {
+function updateUserData(data) {
   users.findOneAndUpdate(
     {name: req.session.user['name']},
     {$set: data},
     {returnOriginal: false},
     (err, result) => {
       if(err) return console.log(err)
-      req.session.user = result.value
+      return result.value
     });
 }
 
