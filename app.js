@@ -31,12 +31,12 @@ MongoClient.connect('mongodb://localhost:27017/', (err, database) => {
 
 app.get('/', (req, res) => {
   users.find().toArray( (req, res) => {
-    console.log(res);
+    //console.log(res);
   });
   if(req.session && req.session.user) {
     console.log(req.session.user);
     res.render('pages/index', {
-      anarchy: anarchy
+      anarchy: req.session.user['anarchy']
     });
   } else {
     res.render('pages/login');
@@ -50,7 +50,7 @@ app.post('/login', (req, res) => {
     if(err) return console.log(err)
     if(!result) {
       rb.future = false;
-      rb.autopsy = false;
+      rb.anarchy = false;
       console.log('here');
       users.save(rb, (err, result) => {
         if(err) return console.log(err)
@@ -67,7 +67,15 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/autopsy-report', (req, res) => {
-  anarchy = true;
+  req.session.user['anarchy'] = true;
+  users.findOneAndUpdate(
+    {name: req.session.user['name']}, 
+    {$set: {anarchy: true}},
+    {returnOriginal: false},
+    (err, doc) => {
+      if(err) return console.log(err)
+      req.session.user = console.log(doc.value)
+    });
   res.render('pages/autopsy-report');
 });
 
