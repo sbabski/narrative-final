@@ -71,16 +71,30 @@ app.get('/autopsy-report', (req, res) => {
   res.render('pages/autopsy-report');
 });
 
-app.get('/anarchist-newspaper', (req, res) => {
+app.get('/agitator/attack', (req, res) => {
   if(req.session && req.session.user) {
     users.findOne({name: req.session.user.name}, (err, u) => {
       if(err) console.log(err);
-      res.render('pages/anarchist-newspaper', {
+      res.render('pages/agitator', {
         convo: u.convo1
+        //vars for attack, headline, correct date
       });
       if(u.convo1 == false) {
         updateUserData(req.session.user['name'], {convo1: true});
       }
+    });
+  } else {
+    res.redirect('/');
+  }
+});
+
+app.get('/agitator/harbor', (req, res) => {
+  if(req.session && req.session.user) {
+    users.findOne({name: req.session.user.name}, (err, u) => {
+      if(err) console.log(err);
+      res.render('pages/agitator', {
+        
+      });
     });
   } else {
     res.redirect('/');
