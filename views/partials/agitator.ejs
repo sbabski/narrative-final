@@ -11,7 +11,7 @@
     <div class="u-full-width center-text">
       <h1 class="title">
         <span>THE</span>
-        <img src="images/anarchist_star.png">
+        <img src="/images/anarchist_star.png">
         <span class="right">GITATOR</span>
       </h1>
     </div>
@@ -30,7 +30,7 @@
   <div class="row spaced">
     <div class="u-full-width center-text">
       <h4>DRUG ENHANCED POLICE ATTACK CIVILIAN PROTESTERS</h4>
-      <img class="full" src="images/z33BTXy.jpg">
+      <img class="full" src="/images/z33BTXy.jpg">
       <p>>>> St. Louis police, aided by genetically enhanced soldiers, led a brutal crackdown on anti-government protesters late Wednesday. 
       <br><br>
       The protesters, speaking up against previous police crackdowns, deep-seated political corruption, and widespread economic strife in the city, were marching down Washington Ave. when several police trucks moved in suddenly to block their path. Several squads of genetically enhanced police - identifiable by their facemasks and abnormally muscular builds - emerged from the trucks, heavily armed. They immediately entered the crowd and began beating and dragging away the protestors.
@@ -46,7 +46,7 @@
   <footer>
     <% include ../partials/footer %>
   </footer>
-
+  <% if(JSON.stringify(convo)) { %>
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
   <script src="/vendor/html2canvas.js"></script>
   <script src="/vendor/glitch.js"></script>
@@ -55,25 +55,28 @@
     $(document).ready(function() {
       var convo = <%- JSON.stringify(convo) %>;
       console.log(convo);
-      if(convo != null && convo == false) {
-        setTimeout(function() {
-          $('body').glitch('replace', {
-            amount: 10
-          });
+      if(convo != null) {
+        if(convo == false) {
           setTimeout(function() {
-            var chat = window.open('/chat', 'Chat', 'width=400, height=400');
-            if(chat) {
-                if(chat.closed == false) {
-                  chat.close();
-                }
-                window.open('/chat', 'Chat', 'width=400, height=400');
-            } else {
-                console.log('blocked');
-            }
-          }, 3000);
-        }, 4000);
+            $('body').glitch('replace', {
+              amount: 10
+            });
+            setTimeout(function() {
+              var chat = window.open('/chat', 'Chat', 'width=400, height=400');
+              if(chat) {
+                  if(chat.closed == false) {
+                    chat.close();
+                  }
+                  window.open('/chat', 'Chat', 'width=400, height=400');
+              } else {
+                  console.log('blocked');
+              }
+            }, 3000);
+          }, 4000);
+        }
       }
     });
   </script>
+  <% } %>
 </body>
 </html>
