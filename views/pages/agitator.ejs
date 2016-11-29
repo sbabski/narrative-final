@@ -29,9 +29,13 @@
 
   <div class="row spaced">
     <div class="u-full-width center-text">
+
       <% if(JSON.stringify(article) == 'attack') { %>
         <% include ../partials/agitator/attack %>
+      <% } else { %>
+        <%- JSON.stringify(article) %>
       <% } %>
+
     </div>
   </div>
 
