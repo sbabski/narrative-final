@@ -93,7 +93,7 @@ app.get('/agitator/harbor', (req, res) => {
     users.findOne({name: req.session.user.name}, (err, u) => {
       if(err) console.log(err);
       res.render('pages/agitator', {
-        
+        convo: null
       });
     });
   } else {
