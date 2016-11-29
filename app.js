@@ -22,7 +22,6 @@ app.use(function(req, res, next) {
     users.findOne({name: req.session.user.name}, (err, u) => {
       if(err) console.log(err);
       req.user = u;
-      req.session.user = u;
       next();
     });
   } else {
@@ -82,7 +81,7 @@ app.post('/login', (req, res) => {
 /*--------------- Evidence Pages --------------*/
 
 app.get('/autopsy-report', requireLogin, (req, res) => {
-  updateUserData(req.name, {anarchy: true});
+  updateUserData(req.session.user.name, {anarchy: true});
   res.render('pages/autopsy-report');
 });
 
@@ -145,6 +144,7 @@ app.get('/logout', (req, res) => {
 });
 
 function updateUserData(username, data) {
+  console.log(username);
   users.findOneAndUpdate(
     {name: username},
     {$set: data},
