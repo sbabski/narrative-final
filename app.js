@@ -82,7 +82,7 @@ app.post('/login', (req, res) => {
 /*--------------- Evidence Pages --------------*/
 
 app.get('/autopsy-report', requireLogin, (req, res) => {
-  updateUserData(req.session.user['name'], {anarchy: true});
+  updateUserData(req.name, {anarchy: true});
   res.render('pages/autopsy-report');
 });
 
@@ -155,7 +155,7 @@ function updateUserData(username, data) {
 
 function requireLogin(req, res, next) {
   if(!req.user) {
-    res.redirect('/login');
+    res.redirect('/');
   } else {
     next();
   }
