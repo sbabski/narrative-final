@@ -71,14 +71,33 @@ app.get('/autopsy-report', (req, res) => {
   res.render('pages/autopsy-report');
 });
 
+app.get('/agitator/:article', (req, res) => {
+  if(req.session && req.session.user) {
+    users.findOne({name: req.session.user.name}, (err, u) => {
+      if(err) console.log(err);
+      console.log(req.article)
+      res.render('pages/agitator', {
+        convo: u.convo1,
+        article: 'attack',
+        date: 'Oct. 26, 2037'
+      });
+      if(u.convo1 == false) {
+        updateUserData(req.session.user['name'], {convo1: true});
+      }
+    });
+  } else {
+    res.redirect('/');
+  }
+}
+/*
 app.get('/agitator/attack', (req, res) => {
   if(req.session && req.session.user) {
     users.findOne({name: req.session.user.name}, (err, u) => {
       if(err) console.log(err);
       res.render('pages/agitator', {
         convo: u.convo1,
-        article: 'attack'
-        //vars for attack, headline, correct date
+        article: 'attack',
+        date: 'Oct. 26, 2037'
       });
       if(u.convo1 == false) {
         updateUserData(req.session.user['name'], {convo1: true});
@@ -95,13 +114,14 @@ app.get('/agitator/harbor', (req, res) => {
       if(err) console.log(err);
       res.render('pages/agitator', {
         convo: null,
-        article: 'harbor'
+        article: 'harbor',
+        date: '???'
       });
     });
   } else {
     res.redirect('/');
   }
-});
+});*/
 
 app.get('/myositis', (req, res) => {
   res.render('pages/myositis');

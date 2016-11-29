@@ -32,8 +32,8 @@
 
       <% if(article == 'attack') { %>
         <% include ../partials/agitator/attack %>
-      <% } else { %>
-        <%- article == true %>
+      <% } else if(article == 'harbor') { %>
+        <% include ../partials/agitator/attack %>
       <% } %>
 
     </div>
