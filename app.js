@@ -21,6 +21,8 @@ app.use(function(req, res, next) {
   if (req.session && req.session.user) {
     users.findOne({name: req.session.user.name}, (err, u) => {
       if(err) console.log(err);
+      req.user = u;
+      req.session.user = u;
       next();
     });
   } else {
