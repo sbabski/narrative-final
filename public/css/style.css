@@ -12,6 +12,10 @@
   margin-top: 50px;
 }
 
+.anarchist p.up {
+  margin-top: 0;
+}
+
 .row.spaced {
   margin-top: 50px  ;
 }
