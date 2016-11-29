@@ -30,10 +30,10 @@
   <div class="row spaced">
     <div class="u-full-width center-text">
 
-      <% if(JSON.stringify(article) == 'attack') { %>
+      <% if(article == 'attack') { %>
         <% include ../partials/agitator/attack %>
       <% } else { %>
-        <%- JSON.stringify(article) %>
+        <%- article == true %>
       <% } %>
 
     </div>
@@ -51,6 +51,7 @@
     $(document).ready(function() {
       var convo = <%- JSON.stringify(convo) %>;
       console.log(convo);
+      console.log(<%- JSON.stringify(article) %> == true);
       if(convo != null) {
         if(convo == false) {
           setTimeout(function() {
