@@ -29,6 +29,7 @@
 
   <div class="row spaced">
     <div class="u-full-width center-text">
+      <%- JSON.stringify(article) %>
       <% include ../partials/agitator/attack %>
     </div>
   </div>
@@ -36,7 +37,7 @@
   <footer>
     <% include ../partials/footer %>
   </footer>
-  <% if(JSON.stringify(convo)) { %>
+  <% if(convo) { %>
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
   <script src="/vendor/html2canvas.js"></script>
   <script src="/vendor/glitch.js"></script>

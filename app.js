@@ -76,7 +76,8 @@ app.get('/agitator/attack', (req, res) => {
     users.findOne({name: req.session.user.name}, (err, u) => {
       if(err) console.log(err);
       res.render('pages/agitator', {
-        convo: u.convo1
+        convo: u.convo1,
+        article: 'attack'
         //vars for attack, headline, correct date
       });
       if(u.convo1 == false) {
@@ -93,7 +94,8 @@ app.get('/agitator/harbor', (req, res) => {
     users.findOne({name: req.session.user.name}, (err, u) => {
       if(err) console.log(err);
       res.render('pages/agitator', {
-        convo: null
+        convo: null,
+        article: 'harbor'
       });
     });
   } else {
