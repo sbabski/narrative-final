@@ -19,7 +19,7 @@
 
   <div class="row">
     <div class="six columns">
-      <span>Oct. 26, 2037</span>
+      <span><%- date %></span>
     </div>
     <div class="six columns">
       <span class="u-pull-right">16 Years of Anarchist News for the People</span>
@@ -49,27 +49,23 @@
   <script>
     $(document).ready(function() {
       var convo = <%- JSON.stringify(convo) %>;
-      console.log(convo);
-      console.log(<%- JSON.stringify(article) %> == true);
-      if(convo != null) {
-        if(convo == false) {
+      if(convo == false) {
+        setTimeout(function() {
+          $('body').glitch('replace', {
+            amount: 10
+          });
           setTimeout(function() {
-            $('body').glitch('replace', {
-              amount: 10
-            });
-            setTimeout(function() {
-              var chat = window.open('/chat', 'Chat', 'width=400, height=400');
-              if(chat) {
-                  if(chat.closed == false) {
-                    chat.close();
-                  }
-                  window.open('/chat', 'Chat', 'width=400, height=400');
-              } else {
-                  console.log('blocked');
-              }
-            }, 3000);
-          }, 4000);
-        }
+            var chat = window.open('/chat', 'Chat', 'width=400, height=400');
+            if(chat) {
+                if(chat.closed == false) {
+                  chat.close();
+                }
+                window.open('/chat', 'Chat', 'width=400, height=400');
+            } else {
+                console.log('blocked');
+            }
+          }, 3000);
+        }, 4000);
       }
     });
   </script>
