@@ -74,21 +74,32 @@ app.get('/autopsy-report', (req, res) => {
 app.get('/agitator/:article', (req, res) => {
   if(req.session && req.session.user) {
     users.findOne({name: req.session.user.name}, (err, u) => {
-      if(err) console.log(err);
-      console.log(req.article)
-      res.render('pages/agitator', {
-        convo: u.convo1,
-        article: 'attack',
-        date: 'Oct. 26, 2037'
-      });
-      if(u.convo1 == false) {
-        updateUserData(req.session.user['name'], {convo1: true});
+      if(err) return console.log(err);
+      console.log(req.params.article);
+      var article = req.params.article;
+      var convo, date;
+      if(article == 'attack') {
+        convo = u.convo1;
+        date = 'Oct. 26, 2037'
+        if(u.convo1 == false) {
+          updateUserData(req.session.user['name'], {convo1: true});
+        }
+      } else if (article == 'harbor') {
+        convo = null;
+        date = '???';
+      } else {
+        return res.redirect('/');
       }
+      res.render('pages/agitator', {
+        convo: convo,
+        article: article,
+        date: date
+      });
     });
   } else {
     res.redirect('/');
   }
-}
+});
 /*
 app.get('/agitator/attack', (req, res) => {
   if(req.session && req.session.user) {
