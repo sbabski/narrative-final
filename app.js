@@ -17,6 +17,16 @@ app.use(session({
   duration: 30 * 60 * 1000,
   activeDuration: 5 * 60 * 1000
 }));
+app.use(function(req, res, next) {
+  if (req.session && req.session.user) {
+    users.findOne({name: req.session.user.name}, (err, u) => {
+      if(err) console.log(err);
+      next();
+    });
+  } else {
+    next();
+  }
+});
 app.set('view engine', 'ejs')
 
 MongoClient.connect('mongodb://localhost:27017/', (err, database) => {
@@ -78,7 +88,6 @@ app.get('/agitator/:article', (req, res) => {
   if(req.session && req.session.user) {
     users.findOne({name: req.session.user.name}, (err, u) => {
       if(err) return console.log(err);
-      console.log(req.params.article);
       var article = req.params.article;
       var convo, date;
       if(article == 'attack') {
@@ -104,7 +113,7 @@ app.get('/agitator/:article', (req, res) => {
   }
 });
 
-app.get('/myositis', (req, res) => {
+app.get('/myositis', requireLogin, (req, res) => {
   res.render('pages/myositis');
 });
 
@@ -139,4 +148,12 @@ function updateUserData(username, data) {
     (err, result) => {
       if(err) return console.log(err)
     });
+}
+
+function requireLogin(req, res, next) {
+  if(!req.user) {
+    res.redirect('/login');
+  } else {
+    next();
+  }
 }
