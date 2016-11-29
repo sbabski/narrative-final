@@ -81,7 +81,7 @@ app.post('/login', (req, res) => {
 
 /*--------------- Evidence Pages --------------*/
 
-app.get('/autopsy-report', (req, res) => {
+app.get('/autopsy-report', requireLogin, (req, res) => {
   updateUserData(req.session.user['name'], {anarchy: true});
   res.render('pages/autopsy-report');
 });
@@ -116,6 +116,7 @@ app.get('/agitator/:article', (req, res) => {
 });
 
 app.get('/myositis', requireLogin, (req, res) => {
+  console.log(req.user);
   res.render('pages/myositis');
 });
 
@@ -124,7 +125,7 @@ app.get('/myositis', requireLogin, (req, res) => {
 
 /*------------- Other ---------------*/
 
-app.get('/chat', (req, res) => {
+app.get('/chat', requireLogin, (req, res) => {
   res.render('pages/chat', {
     name: req.session.user.name
   });
