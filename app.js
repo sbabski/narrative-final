@@ -44,6 +44,7 @@ app.get('/', (req, res) => {
   if(req.session && req.session.user) {
     users.findOne({name: req.session.user.name}, (err, u) => {
       if(err) console.log(err);
+      console.log(req.session.user.anarchy, req.user.anarchy, u.anarchy);
       res.render('pages/index', {
         anarchy: u.anarchy
       });
@@ -55,7 +56,6 @@ app.get('/', (req, res) => {
 
 app.post('/login', (req, res) => {
   var rb = req.body;
-  console.log(rb.name);
   users.findOne({name: rb.name}, (err, result) => {
     if(err) return console.log(err)
     if(!result) {
