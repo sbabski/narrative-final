@@ -48,6 +48,7 @@ MongoClient.connect('mongodb://localhost:27017/', (err, database) => {
 /*------------- Routes ---------------*/
 
 app.get('/', requireLogin, (req, res) => {
+  console.log(req.user.anarchy);
   res.render('pages/index', {
     shapes: buildRevisedShapes(req.user.anarchy)
   });
@@ -91,9 +92,9 @@ app.get('/logout', (req, res) => {
 /*--------------- Evidence Pages --------------*/
 
 app.get('/autopsy-report', requireLogin, (req, res) => {
-  //contributes to anarchy unlocking
-  updateUserData(req.user.name, {autopsy: true});
-  unlockAutopsy(req.user);
+  if(!req.user.autopsy) {
+    updateUserData(req.user.name, {autopsy: true}, unlockAnarchy);
+  }
   res.render('pages/autopsy-report');
 });
 
@@ -102,9 +103,9 @@ app.get('/myositis', requireLogin, (req, res) => {
 });
 
 app.get('/mayor', requireLogin, (req, res) => {
-  //contributes to anarchy unlocking
-  updateUserData(req.user.name, {mayor: true});
-  unlockAutopsy(req.user);
+  if(!req.user.mayor) {
+    updateUserData(req.user.name, {mayor: true}, unlockAnarchy);
+  }
   res.render('pages/mayor');
 });
 
@@ -132,12 +133,14 @@ app.get('/agitator/:article', requireLogin, (req, res) => {
 
 /*------------- Functions ---------------*/
 
-function updateUserData(username, data) {
+function updateUserData(username, data, cb) {
   users.findOneAndUpdate(
     {name: username},
     {$set: data},
+    {returnOriginal: false},
     (err, result) => {
-      if(err) return console.log(err)
+      if(err) return console.log(err);
+      if(cb) cb(result.value);
     });
 }
 
@@ -150,7 +153,10 @@ function requireLogin(req, res, next) {
 }
 
 function buildRevisedShapes(anarchy) {
-  var shapes = shapeDict;
+  var shapes = {};
+  Object.keys(shapeDict).forEach(function(key) {
+    shapes[key] = shapeDict[key];
+  });
   if(!anarchy) delete shapes.anarchy;
   console.log(shapes);
   return shapes;
@@ -170,8 +176,10 @@ function newUser(data) {
 
 /*------------- State-Specific Functions ---------------*/
 
-function unlockAutopsy(u) {
-  console.log(u.autopsy);
-  console.log(u.mayor);
-  console.log(u.anarcy);
+function unlockAnarchy(u) {
+  console.log('checking anarchy');
+  if(u.autopsy && u.mayor) {
+    console.log('anarchy time');
+    updateUserData(u.name, {anarchy: true});
+  }
 }
