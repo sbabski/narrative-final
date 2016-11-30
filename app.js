@@ -160,8 +160,9 @@ function requireLogin(req, res, next) {
 };*/
 
 var shapeDict = {
-  'first': {'john': 'name'}, 
-  'last': 'doe'
+  'autopsy': {'url': '/autopsy-report'}, 
+  'mayor': {'url': '/mayor'},
+  'anarchy': {'url': '/agitator/attack'}
 };
 
 function buildRevisedShapes(anarchy) {
