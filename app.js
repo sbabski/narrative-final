@@ -43,6 +43,7 @@ MongoClient.connect('mongodb://localhost:27017/', (err, database) => {
 /*------------- Routes ---------------*/
 
 app.get('/', requireLogin, (req, res) => {
+  console.log(req.user.anarchy);
   res.render('pages/index', {
     anarchy: req.user.anarchy
   });
@@ -61,14 +62,12 @@ app.post('/login', (req, res) => {
       rb.future = false;
       rb.anarchy = false;
       rb.convo1 = false;
-      console.log('here');
       users.save(rb, (err, result) => {
         if(err) return console.log(err)
         console.log('saved to database')
       });
       req.session.user = rb;
     } else {
-     console.log('here 2');
      req.session.user = result;
     }
     res.redirect('/');
