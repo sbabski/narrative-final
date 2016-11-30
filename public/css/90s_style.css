@@ -101,4 +101,11 @@ nav .pull-right {
   flex: 1;
 }
 
-/* black background, green hacker text */
+footer .row {
+  text-align: center;
+}
+
+footer a {
+  font-size: 30px;
+  margin: 0 20px;
+}

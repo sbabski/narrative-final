@@ -41,3 +41,10 @@
 img.full {
   width: 100%;
 }
+
+canvas {
+    display: block;
+    margin: auto;
+    padding: 0;
+
+}
