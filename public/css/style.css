@@ -58,3 +58,13 @@ footer {
   text-align: center;
   font-size: 1.75 rem;
 }
+
+.american header {
+  font-family: 'Bungee', cursive;
+  margin: 2rem 0;
+}
+
+.american header h5 {
+  font-size: 1.75rem;
+  margin-top: 2.3rem;
+}

@@ -63,29 +63,11 @@ app.post('/login', (req, res) => {
   //test if we need to run this find again
   users.findOne({name: rb.name}, (err, result) => {
     if(err) return console.log(err);
-    //req.session.user = result ? result : newUser(rb);
-    var cb = function(data) {
+    var direct = function(data) {
       req.session.user = data;
       res.redirect('/');
     }
-    result? cb(result) : newUser(rb, cb);
-    //if(!result) {
-      //newUser(rb, cb);
-      /*rb.autopsy = false;
-      rb.mayor = false;
-      rb.anarchy = false;
-      rb.convo1 = false;
-      users.save(data, (err, ult) => {
-        if(err) return console.log(err)
-        console.log('saved to database')
-      });
-      req.session.user = rb;*/
-    //} else {
-     //req.session.user = result;
-    // cb(result);
-    //}
-
-    //res.redirect('/');
+    result? direct(result) : newUser(rb, direct);
   });
 });
 
