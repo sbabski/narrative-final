@@ -41,8 +41,10 @@ MongoClient.connect('mongodb://localhost:27017/', (err, database) => {
 });
 
 app.get('/', requireLogin, (req, res) => {
-
-  if(req.session && req.session.user) {
+  res.render('pages/index', {
+    anarchy: req.user.anarchy
+  });
+  /*if(req.session && req.session.user) {
     users.findOne({name: req.session.user.name}, (err, u) => {
       if(err) console.log(err);
       console.log(req.session.user.anarchy, req.user.anarchy, u.anarchy);
@@ -52,7 +54,7 @@ app.get('/', requireLogin, (req, res) => {
     });
   } else {
     res.render('pages/login');
-  }
+  }*/
 });
 
 app.get('/login', (req, res) => {
@@ -86,13 +88,31 @@ app.post('/login', (req, res) => {
 /*--------------- Evidence Pages --------------*/
 
 app.get('/autopsy-report', requireLogin, (req, res) => {
-  console.log(req.session.user.name, req.user.name);
-  updateUserData(req.session.user.name, {anarchy: true});
+  updateUserData(req.user.name, {anarchy: true});
   res.render('pages/autopsy-report');
 });
 
-app.get('/agitator/:article', (req, res) => {
-  if(req.session && req.session.user) {
+app.get('/agitator/:article', requireLogin, (req, res) => {
+  var article = req.params.article;
+  var convo, date;
+  if(article == 'attack') {
+    convo = u.convo1;
+    date = 'Oct. 26, 2037'
+    if(u.convo1 == false) {
+      updateUserData(req.user.name, {convo1: true});
+    }
+  } else if (article == 'harbor') {
+    convo = null;
+    date = 'Dec. 13, 2037';
+  } else {
+    return res.redirect('/');
+  }
+  res.render('pages/agitator', {
+    convo: convo,
+    article: article,
+    date: date
+  });
+  /*if(req.session && req.session.user) {
     users.findOne({name: req.session.user.name}, (err, u) => {
       if(err) return console.log(err);
       var article = req.params.article;
@@ -117,11 +137,10 @@ app.get('/agitator/:article', (req, res) => {
     });
   } else {
     res.redirect('/');
-  }
+  }*/
 });
 
 app.get('/myositis', requireLogin, (req, res) => {
-  console.log(req.user);
   res.render('pages/myositis');
 });
 
