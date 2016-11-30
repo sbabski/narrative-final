@@ -6,8 +6,6 @@ const dialogue = require('dialoguejs');
 const app = express();
 var db, currentUser, users;
 
-var future = false;
-
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static('public'))
@@ -45,7 +43,8 @@ MongoClient.connect('mongodb://localhost:27017/', (err, database) => {
 app.get('/', requireLogin, (req, res) => {
   console.log(req.user.anarchy);
   res.render('pages/index', {
-    anarchy: req.user.anarchy
+    anarchy: req.user.anarchy,
+    testvar: buildRevisedShapes(req.user.anarchy)
   });
 });
 
@@ -152,4 +151,16 @@ function requireLogin(req, res, next) {
   } else {
     next();
   }
+}
+
+var shapeDict = {
+  'autopsy': {'url': '/autopsy-report', 'shape': [610, 120, 325, 50]},
+  'mayor': {'url': '/mayor', 'shape': [100, 100, 40, 40]}
+  'anarchy': {'url': '/agitator/attack', 'shape': [400, 190, 60, 65]},
+};
+
+function buildRevisedShapes(anarchy) {
+  var result = shapeDict;
+  if(anarchy) delete result.anarchy;
+  return result;
 }

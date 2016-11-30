@@ -11,29 +11,25 @@
   </div>
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
   <script>
-
     $(document).ready(function() {
         //var anarchy = <%- JSON.stringify(anarchy) %>;
-        var anarchy = true;
+        var anarchy = false;
         var canvas, ctx, img, width, shapes, urls;
 
+        //values for when canvas width is 1000
         var shapeDict = [
           {'url': '/autopsy-report', 'shape': [610, 120, 325, 50]},
           {'url': '/agitator/attack', 'shape': [400, 190, 60, 65]},
           {'url': '/mayor', 'shape': [100, 100, 40, 40]}
-        ]
-        
-        urls = ['/autopsy-report', '/agitator/attack', '/mayor'];
-        //values for when canvas width is 1000
-        shapes = [[610, 120, 325, 50], [400, 190, 60, 65], [100, 100, 40, 40]]
-        shapes = buildRevisedShapes();
+        ];
+        shapeDict = buildRevisedShapes();
 
         canvas = document.createElement('canvas');
         ctx = canvas.getContext('2d');
         $('body').prepend(canvas);
 
         img = new Image();
-        img.src = '/images/cypher.jpg';
+        img.src = 'public/images/cypher.jpg';
         img.onload = function() {
           resizing();
           $(canvas).on('click', checkPos);
@@ -41,22 +37,22 @@
         $(window).resize(resizing);
 
         function buildRevisedShapes() {
-            result = [shapes[0]];
-            if (anarchy) result.push(shapes[1]);
+            result = [shapeDict[0], shapeDict[2]];
+            if (anarchy) result.push(shapeDict[1]);
             return result;
         }
 
         function checkPos(evt) {
-          for(var i = 0; i < shapes.length; i++) {
+          for(var i = 0; i < shapeDict.length; i++) {
             var off = $(canvas).offset();
-            var left = scale(shapes[i][0]) + off.left;
-            var right = left + scale(shapes[i][2]) + off.left;
-            var top = scale(shapes[i][1]) + off.top;
-            var bottom = top + scale(shapes[i][3]) + off.top;
+            var sh = shapeDict[i].shape;
+            var left = scale(sh[0]) + off.left;
+            var right = left + scale(sh[2]) + off.left;
+            var top = scale(sh[1]) + off.top;
+            var bottom = top + scale(sh[3]) + off.top;
             if(evt.clientX > left && evt.clientX < right) {
               if(evt.clientY > top && evt.clientY < bottom) {
-                console.log(urls[i]);
-                $(location).attr('href', urls[i]);
+                $(location).attr('href', shapeDict[i].url);
               }
             }
           }
@@ -78,7 +74,7 @@
           ctx.clearRect(0, 0, canvas.width, canvas.height);
           ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
           for(var i = 0; i < shapeDict.length; i++) {
-            drawSquare(shapes[i]);
+            drawSquare(shapeDict[i].shape);
           }
         }
       });
