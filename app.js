@@ -63,10 +63,24 @@ app.post('/login', (req, res) => {
   //test if we need to run this find again
   users.findOne({name: rb.name}, (err, result) => {
     if(err) return console.log(err);
-    req.session.user = result ? result : newUser(rb);
+    //req.session.user = result ? result : newUser(rb);
+
+    if(!result) {
+      rb.autopsy = false;
+      rb.mayor = false;
+      rb.anarchy = false;
+      rb.convo1 = false;
+      users.save(data, (err, ult) => {
+        if(err) return console.log(err)
+        console.log('saved to database')
+      });
+      req.session.user = rb;
+    } else {
+     req.session.user = result;
+    }
+
     res.redirect('/');
   });
-
 });
 
 app.get('/chat', requireLogin, (req, res) => {
@@ -154,11 +168,10 @@ function requireLogin(req, res, next) {
 
 function buildRevisedShapes(anarchy) {
   var shapes = {};
-  Object.keys(shapeDict).forEach(function(key) {
+  Object.keys(shapeDict).forEach(function(key, value) {
     shapes[key] = shapeDict[key];
   });
   if(!anarchy) delete shapes.anarchy;
-  console.log(shapes);
   return shapes;
 }
 
@@ -177,9 +190,7 @@ function newUser(data) {
 /*------------- State-Specific Functions ---------------*/
 
 function unlockAnarchy(u) {
-  console.log('checking anarchy');
   if(u.autopsy && u.mayor) {
-    console.log('anarchy time');
     updateUserData(u.name, {anarchy: true});
   }
 }
