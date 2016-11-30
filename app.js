@@ -153,10 +153,15 @@ function requireLogin(req, res, next) {
   }
 }
 
-var shapeDict = {
+/*var shapeDict = {
   'autopsy': {'url': '/autopsy-report', 'shape': [610, 120, 325, 50]},
   'mayor': {'url': '/mayor', 'shape': [100, 100, 40, 40]}
   'anarchy': {'url': '/agitator/attack', 'shape': [400, 190, 60, 65]},
+};*/
+
+var shapeDict = {
+  'first': {'john': 'name'}, 
+  'last': 'doe'
 };
 
 function buildRevisedShapes(anarchy) {

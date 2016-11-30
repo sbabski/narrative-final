@@ -12,7 +12,8 @@
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
   <script>
     $(document).ready(function() {
-        //var anarchy = <%- JSON.stringify(anarchy) %>;
+        var testvar = <%- JSON.stringify(testvar) %>;
+        console.log(testvar);
         var anarchy = false;
         var canvas, ctx, img, width, shapes, urls;
 
@@ -29,7 +30,7 @@
         $('body').prepend(canvas);
 
         img = new Image();
-        img.src = 'public/images/cypher.jpg';
+        img.src = '/images/cypher.jpg';
         img.onload = function() {
           resizing();
           $(canvas).on('click', checkPos);
