@@ -53,7 +53,7 @@
           $('body').glitch('replace', {
             amount: 10
           });
-          setTimeout(function() {
+          /*setTimeout(function() {
             var chat = window.open('/chat', 'Chat', 'width=400, height=400');
             if(chat) {
                 if(chat.closed == false) {
@@ -63,7 +63,8 @@
             } else {
                 console.log('blocked');
             }
-          }, 3000);
+          }, 3000);*/
+          openChatDelay();
         }, 4000);
       }
     });
