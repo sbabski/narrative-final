@@ -68,8 +68,9 @@ app.post('/login', (req, res) => {
       req.session.user = data;
       res.redirect('/');
     }
-    if(!result) {
-      newUser(rb, cb);
+    result? cb(result) : newUser(rb, cb);
+    //if(!result) {
+      //newUser(rb, cb);
       /*rb.autopsy = false;
       rb.mayor = false;
       rb.anarchy = false;
@@ -79,10 +80,10 @@ app.post('/login', (req, res) => {
         console.log('saved to database')
       });
       req.session.user = rb;*/
-    } else {
+    //} else {
      //req.session.user = result;
-     cb(result);
-    }
+    // cb(result);
+    //}
 
     //res.redirect('/');
   });
