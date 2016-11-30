@@ -64,9 +64,13 @@ app.post('/login', (req, res) => {
   users.findOne({name: rb.name}, (err, result) => {
     if(err) return console.log(err);
     //req.session.user = result ? result : newUser(rb);
-
+    var cb = function(data) {
+      req.session.user = data;
+      res.redirect('/');
+    }
     if(!result) {
-      rb.autopsy = false;
+      newUser(rb, cb);
+      /*rb.autopsy = false;
       rb.mayor = false;
       rb.anarchy = false;
       rb.convo1 = false;
@@ -74,12 +78,13 @@ app.post('/login', (req, res) => {
         if(err) return console.log(err)
         console.log('saved to database')
       });
-      req.session.user = rb;
+      req.session.user = rb;*/
     } else {
-     req.session.user = result;
+     //req.session.user = result;
+     cb(result);
     }
 
-    res.redirect('/');
+    //res.redirect('/');
   });
 });
 
@@ -175,7 +180,7 @@ function buildRevisedShapes(anarchy) {
   return shapes;
 }
 
-function newUser(data) {
+function newUser(data, cb) {
   data.autopsy = false;
   data.mayor = false;
   data.anarchy = false;
@@ -183,7 +188,7 @@ function newUser(data) {
   users.save(data, (err, result) => {
     if(err) return console.log(err)
     console.log('saved to database')
-    return data;
+    cb(data);
   });
 }
 
