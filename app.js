@@ -55,7 +55,7 @@ app.get('/', (req, res) => {
 
 app.post('/login', (req, res) => {
   var rb = req.body;
-  rb.name = rb.name();
+  console.log(rb.name);
   users.findOne({name: rb.name}, (err, result) => {
     if(err) return console.log(err)
     if(!result) {
