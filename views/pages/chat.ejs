@@ -20,8 +20,7 @@
   <script>
     var name = <%- JSON.stringify(name) %>;
     var index = 0;
-    var timeForConvo = <%- convo %>;
-    console.log(timeForConvo);
+    var timeForConvo = <%- JSON.stringify(convo) %>;
     var convo = [
       {
         'a': 'Dragonfly439',
@@ -75,7 +74,12 @@
       }
     ];
 
-    AIMessage();
+    if(timeForConvo) {
+      AIMessage();
+    }  else {
+      var result = '<p><b class="no-messages">You have no current conversations.</b></p>';
+      $('#toRead').append(result);
+    }
 
     function putInRead() {
       var line = convo[index];

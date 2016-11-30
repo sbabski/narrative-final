@@ -55,3 +55,9 @@ button:hover {
 button:focus {
   outline: 0;
 }
+
+.no-messages {
+  display: block;
+  text-align: center;
+  margin: 10px;
+}
