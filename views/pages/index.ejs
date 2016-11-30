@@ -12,18 +12,18 @@
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
   <script>
     $(document).ready(function() {
-        var testvar = <%- JSON.stringify(testvar) %>;
+        var shapeDict = <%- JSON.stringify(testvar) %>;
         console.log(testvar.autopsy);
         var anarchy = false;
         var canvas, ctx, img, width, shapes, urls;
 
         //values for when canvas width is 1000
-        var shapeDict = [
+        /*var shapeDict = [
           {'url': '/autopsy-report', 'shape': [610, 120, 325, 50]},
           {'url': '/agitator/attack', 'shape': [400, 190, 60, 65]},
           {'url': '/mayor', 'shape': [100, 100, 40, 40]}
         ];
-        shapeDict = buildRevisedShapes();
+        shapeDict = buildRevisedShapes();*/
 
         canvas = document.createElement('canvas');
         ctx = canvas.getContext('2d');
