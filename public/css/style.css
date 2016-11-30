@@ -42,9 +42,19 @@ img.full {
   width: 100%;
 }
 
-canvas {
-    display: block;
-    margin: auto;
-    padding: 0;
+.canvas-wrapper {
+  width: 90%;
+  margin: 0 auto;
+  overflow-y: hidden;
+}
 
+canvas {
+  display: block;
+  margin: auto;
+  padding: 0;
+}
+
+footer {
+  text-align: center;
+  font-size: 1.75 rem;
 }

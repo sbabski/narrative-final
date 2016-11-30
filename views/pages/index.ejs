@@ -5,10 +5,10 @@
 <head>
     <% include ../partials/head %>
 </head>
-<body class="container">
-
+<body class="canvas-wrapper">
+  <div class="container">
   <% include ../partials/footer %>
-  
+  </div>
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
   <script>
 
@@ -41,11 +41,11 @@
 
         function checkPos(evt) {
           for(var i = 0; i < shapes.length; i++) {
-            var left = scale(shapes[i][0]);
-            var right = left + scale(shapes[i][2]);
-            var top = scale(shapes[i][1]);
-            console.log('here');
-            var bottom = top + scale(shapes[i][3]);
+            var off = $(canvas).offset();
+            var left = scale(shapes[i][0]) + off.left;
+            var right = left + scale(shapes[i][2]) + off.left;
+            var top = scale(shapes[i][1]) + off.top;
+            var bottom = top + scale(shapes[i][3]) + off.top;
             if(evt.clientX > left && evt.clientX < right) {
               if(evt.clientY > top && evt.clientY < bottom) {
                 console.log(urls[i]);
@@ -65,7 +65,7 @@
         }
 
         function resizing() {
-          canvas.width = document.body.clientWidth * 0.75;
+          canvas.width = document.body.clientWidth;
           width = canvas.width;
           canvas.height = img.height/img.width * canvas.width;
           ctx.clearRect(0, 0, canvas.width, canvas.height);
