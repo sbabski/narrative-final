@@ -41,10 +41,8 @@ MongoClient.connect('mongodb://localhost:27017/', (err, database) => {
 /*------------- Routes ---------------*/
 
 app.get('/', requireLogin, (req, res) => {
-  console.log(req.user.anarchy);
   res.render('pages/index', {
-    anarchy: req.user.anarchy,
-    testvar: buildRevisedShapes(req.user.anarchy)
+    shapes: buildRevisedShapes(req.user.anarchy)
   });
 });
 
