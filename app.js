@@ -160,6 +160,7 @@ var shapeDict = {
 
 function buildRevisedShapes(anarchy) {
   var shapes = shapeDict;
-  if(anarchy) delete shapes.anarchy;
+  if(!anarchy) delete shapes.anarchy;
+  console.log(shapes);
   return shapes;
 }
