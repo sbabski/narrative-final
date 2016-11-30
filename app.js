@@ -153,7 +153,7 @@ function requireLogin(req, res, next) {
 
 //values for when canvas width is 1000
 var shapeDict = {
-  'autopsy': {'url': '/autopsy-report', 'shape': [610, 120, 35, 50]}, 
+  'autopsy': {'url': '/autopsy-report', 'shape': [610, 120, 325, 50]}, 
   'mayor': {'url': '/mayor', 'shape': [100, 100, 40, 40]},
   'anarchy': {'url': '/agitator/attack', 'shape': [400, 190, 60, 65]}
 };
