@@ -40,7 +40,8 @@ MongoClient.connect('mongodb://localhost:27017/', (err, database) => {
   })
 });
 
-app.get('/', (req, res) => {
+app.get('/', requireLogin, (req, res) => {
+
   if(req.session && req.session.user) {
     users.findOne({name: req.session.user.name}, (err, u) => {
       if(err) console.log(err);
@@ -53,6 +54,10 @@ app.get('/', (req, res) => {
     res.render('pages/login');
   }
 });
+
+app.get('/login', (req, res) => {
+  res.render('pages/login');
+})
 
 app.post('/login', (req, res) => {
   var rb = req.body;
@@ -81,6 +86,7 @@ app.post('/login', (req, res) => {
 /*--------------- Evidence Pages --------------*/
 
 app.get('/autopsy-report', requireLogin, (req, res) => {
+  console.log(req.session.user.name, req.user.name);
   updateUserData(req.session.user.name, {anarchy: true});
   res.render('pages/autopsy-report');
 });
@@ -155,7 +161,7 @@ function updateUserData(username, data) {
 
 function requireLogin(req, res, next) {
   if(!req.user) {
-    res.redirect('/');
+    res.redirect('/login');
   } else {
     next();
   }
