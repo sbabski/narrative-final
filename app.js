@@ -96,9 +96,9 @@ app.get('/agitator/:article', requireLogin, (req, res) => {
   var article = req.params.article;
   var convo, date;
   if(article == 'attack') {
-    convo = u.convo1;
+    convo = req.user.convo1;
     date = 'Oct. 26, 2037'
-    if(u.convo1 == false) {
+    if(convo == false) {
       updateUserData(req.user.name, {convo1: true});
     }
   } else if (article == 'harbor') {
