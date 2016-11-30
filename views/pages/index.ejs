@@ -13,6 +13,8 @@
   <script>
     $(document).ready(function() {
         var shapeDict = <%- JSON.stringify(shapes) %>;
+        shapeDict = $.map(shapeDict, (k, v) => { return k; });
+
         var canvas, ctx, img, width;
 
         canvas = document.createElement('canvas');

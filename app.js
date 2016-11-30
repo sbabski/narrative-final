@@ -161,6 +161,5 @@ var shapeDict = {
 function buildRevisedShapes(anarchy) {
   var shapes = shapeDict;
   if(anarchy) delete shapes.anarchy;
-  var result = $.map(shapes, (k, v) => { return k; });
-  return result;
+  return shapes;
 }
