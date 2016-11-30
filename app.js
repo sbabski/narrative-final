@@ -40,21 +40,12 @@ MongoClient.connect('mongodb://localhost:27017/', (err, database) => {
   })
 });
 
+/*------------- Routes ---------------*/
+
 app.get('/', requireLogin, (req, res) => {
   res.render('pages/index', {
     anarchy: req.user.anarchy
   });
-  /*if(req.session && req.session.user) {
-    users.findOne({name: req.session.user.name}, (err, u) => {
-      if(err) console.log(err);
-      console.log(req.session.user.anarchy, req.user.anarchy, u.anarchy);
-      res.render('pages/index', {
-        anarchy: u.anarchy
-      });
-    });
-  } else {
-    res.render('pages/login');
-  }*/
 });
 
 app.get('/login', (req, res) => {
@@ -63,6 +54,7 @@ app.get('/login', (req, res) => {
 
 app.post('/login', (req, res) => {
   var rb = req.body;
+  //test if we need to run this find again
   users.findOne({name: rb.name}, (err, result) => {
     if(err) return console.log(err)
     if(!result) {
@@ -84,12 +76,41 @@ app.post('/login', (req, res) => {
 
 });
 
+app.get('/chat', requireLogin, (req, res) => {
+  res.render('pages/chat', {
+    name: req.user.name,
+    convo: req.user.convo1
+  });
+});
+
+app.get('/dropdb', (req, res) => {
+  if(req.session && req.session.user) {
+    req.session.reset();
+  }
+  db.collection('users').drop();
+  res.redirect('/');
+});
+
+app.get('/logout', (req, res) => {
+  req.session.reset();
+  res.redirect('/');
+});
 
 /*--------------- Evidence Pages --------------*/
 
 app.get('/autopsy-report', requireLogin, (req, res) => {
+  //contributes to anarchy unlocking
   updateUserData(req.user.name, {anarchy: true});
   res.render('pages/autopsy-report');
+});
+
+app.get('/myositis', requireLogin, (req, res) => {
+  res.render('pages/myositis');
+});
+
+app.get('/mayor', requireLogin, (req, res) => {
+  //contributes to anarchy unlocking
+  res.render('pages/mayor');
 });
 
 app.get('/agitator/:article', requireLogin, (req, res) => {
@@ -112,62 +133,9 @@ app.get('/agitator/:article', requireLogin, (req, res) => {
     article: article,
     date: date
   });
-  /*if(req.session && req.session.user) {
-    users.findOne({name: req.session.user.name}, (err, u) => {
-      if(err) return console.log(err);
-      var article = req.params.article;
-      var convo, date;
-      if(article == 'attack') {
-        convo = u.convo1;
-        date = 'Oct. 26, 2037'
-        if(u.convo1 == false) {
-          updateUserData(req.session.user['name'], {convo1: true});
-        }
-      } else if (article == 'harbor') {
-        convo = null;
-        date = 'Dec. 13, 2037';
-      } else {
-        return res.redirect('/');
-      }
-      res.render('pages/agitator', {
-        convo: convo,
-        article: article,
-        date: date
-      });
-    });
-  } else {
-    res.redirect('/');
-  }*/
 });
-
-app.get('/myositis', requireLogin, (req, res) => {
-  res.render('pages/myositis');
-});
-
-
-
 
 /*------------- Other ---------------*/
-
-app.get('/chat', requireLogin, (req, res) => {
-  res.render('pages/chat', {
-    name: req.user.name,
-    convo: req.user.convo1
-  });
-});
-
-app.get('/dropdb', (req, res) => {
-  if(req.session && req.session.user) {
-    req.session.reset();
-  }
-  db.collection('users').drop();
-  res.redirect('/');
-});
-
-app.get('/logout', (req, res) => {
-  req.session.reset();
-  res.redirect('/');
-});
 
 function updateUserData(username, data) {
   console.log(username);
