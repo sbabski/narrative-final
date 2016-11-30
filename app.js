@@ -151,7 +151,8 @@ app.get('/myositis', requireLogin, (req, res) => {
 
 app.get('/chat', requireLogin, (req, res) => {
   res.render('pages/chat', {
-    name: req.session.user.name
+    name: req.user.name,
+    convo: req.user.convo1
   });
 });
 

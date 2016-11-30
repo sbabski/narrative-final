@@ -16,8 +16,7 @@
     $(document).ready(function() {
         var anarchy = <%- JSON.stringify(anarchy) %>;
         var canvas, ctx, img, width, shapes, urls;
-
-        //find better way of getting these!!!
+        
         urls = ['/autopsy-report', '/agitator/attack'];
         //values for when canvas width is 1000
         shapes = [[610, 120, 325, 50], [400, 190, 60, 65]]
@@ -67,7 +66,7 @@
         }
 
         function resizing() {
-          canvas.width = document.body.clientWidth;
+          canvas.width = document.body.clientWidth * 0.75;
           width = canvas.width;
           canvas.height = img.height/img.width * canvas.width;
           ctx.clearRect(0, 0, canvas.width, canvas.height);
