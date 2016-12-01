@@ -80,7 +80,7 @@ app.get('/chat', requireLogin, (req, res) => {
 });
 
 app.post('/chat', requireLogin, (req, res) => {
-  updateUserData(req.user.name, {convos: req.body}, unlockActII);
+  updateUserData(req.user.name, {convo: req.body});
 });
 
 app.get('/dropdb', (req, res) => {
@@ -97,7 +97,6 @@ app.get('/logout', (req, res) => {
 });
 
 app.get('/agitate', requireLogin, (req, res) => {
-  console.log(req.query.d);
   res.render('pages/agitator', {
     convo: null,
     article: req.query.a,
