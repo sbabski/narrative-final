@@ -79,6 +79,10 @@ app.get('/chat', requireLogin, (req, res) => {
   });
 });
 
+app.post('/chat', requireLogin, (req, res) => {
+  console.log(req.body);
+});
+
 app.get('/dropdb', (req, res) => {
   if(req.session && req.session.user) {
     req.session.reset();

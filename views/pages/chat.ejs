@@ -106,6 +106,7 @@
       $('#toRead').append(result);
       $('#toRead').scrollTop($('#toRead')[0].scrollHeight);
     }
+
     function putInSend() {
       var lines = convo[index].next;
       if(lines.length) {
@@ -117,7 +118,20 @@
         $('#toSend').append($res);
         $res.click(sendMessage);
       } else {
-        //this is the end of the convo. send ajax back signalling this
+
+        var data = {};
+        data.title = "title";
+        data.message = "message";
+          
+        $.ajax({
+          type: 'POST',
+          data: JSON.stringify(data),
+          contentType: 'application/json',
+          url: '/chat',            
+          success: function(data) {
+            console.log('success');
+          }
+        });
       }
     }
 
