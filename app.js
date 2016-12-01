@@ -131,8 +131,12 @@ app.get('/agitator/:article', requireLogin, (req, res) => {
     if(convo == false) {
       updateUserData(req.user.name, {convo1: true});
     }
-    if(!req.user.convo.1.start) {
-      console.log('start it')
+    if(!req.user.convo[0].start) {
+      req.user.convo[0].start = true;
+      var testFunc(u) {
+        console.log(u);
+      }
+      updateUserData(req.user.name, {convo: req.user.convo});
     }
   } else if (article == 'harbor') {
     convo = null;
@@ -165,6 +169,7 @@ function updateUserData(username, data, cb) {
     {returnOriginal: false},
     (err, result) => {
       if(err) return console.log(err);
+      console.log(result.value);
       if(cb) cb(result.value);
     });
 }
