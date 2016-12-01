@@ -20,10 +20,10 @@
   <script>
     var name = <%- JSON.stringify(name) %>;
     var index = 0;
-    var c = <%- JSON.stringify(convo) %>;
-    
+    var c = <%- JSON.stringify(convo) %>;    
     var cID = -1;
     if(c[0].start) {
+      cID = 0;
       for(i=0; i<c.length; i++) {
         if(c[i].end) {
           cID = i;
@@ -32,6 +32,7 @@
         }
       }
     }
+    console.log(cID);
 
     var convo = [
       {
@@ -107,19 +108,22 @@
     }
     function putInSend() {
       var lines = convo[index].next;
-      var result = '';
-      for(var i = 0; i < lines.length; i++) {
-        result += '<button value="' + lines[i] + '"><b class="blue">' + (i + 1) + ': </b>' + convo[lines[i]].m + '</button>';
+      if(lines.length) {
+        var result = '';
+        for(var i = 0; i < lines.length; i++) {
+          result += '<button value="' + lines[i] + '"><b class="blue">' + (i + 1) + ': </b>' + convo[lines[i]].m + '</button>';
+        }
+        $res = $(result);
+        $('#toSend').append($res);
+        $res.click(sendMessage);
+      } else {
+        //this is the end of the convo. send ajax back signalling this
       }
-      $res = $(result);
-      $('#toSend').append($res);
-      $res.click(sendMessage);
     }
 
     function AIMessage() {
       putInRead();
       setTimeout(putInSend, 1000);
-      console.log('here');
     }
 
     function sendMessage() {
