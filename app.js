@@ -8,15 +8,15 @@ var db, currentUser, users;
 
 //values for when canvas width is 1000
 var shapeDict = [
-  {'autopsy': {'url': '/autopsy-report', 'shape': [610, 120, 325, 50]}, 
-  'alton': {'url': '/alton', 'shape': [100, 100, 60, 60]},
-  'anarchy': {'url': '/agitator/attack', 'shape': [400, 190, 60, 65]},
-  'abandon': {'url': '/dives-dead', 'shape': [70, 460, 60, 60]}},
-  {'american': {'url': '/american', 'shape': [70, 460, 60, 60]},
-  'anarchy': {'url': '/agitator/harbor', 'shape': [400, 190, 60, 65]},
-  'nonsense': {'url': '#', 'shape': [620, 100, 100, 50]},
-  'numerology': {'url': '#', 'shape': [100, 100, 60, 60]},
-  'myth': {'url': '#', 'shape': [200, 200, 60, 60]}}
+  {'autopsy': {'url': '/autopsy-report', 'shape': [650, 225, 325, 70]}, 
+  'alton': {'url': '/alton', 'shape': [40, 140, 120, 80]},
+  'anarchy': {'url': '/agitator/attack', 'shape': [425, 285, 65, 70]},
+  'abandon': {'url': '/dives-dead', 'shape': [125, 430, 120, 60]}},
+  {'american': {'url': '/american', 'shape': [595, 300, 115, 60]},
+  'anarchy': {'url': '/agitator/harbor', 'shape': [425, 285, 65, 70]},
+  'nonsense': {'url': '#', 'shape': [230, 455, 140, 85]},
+  'numerology': {'url': '#', 'shape': [40, 240, 75, 75]},
+  'myth': {'url': '#', 'shape': [715, 450, 100, 70]}}
 ];
 
 app.use(bodyParser.json());
