@@ -111,6 +111,8 @@ app.get('/agitate', requireLogin, (req, res) => {
 
 /*--------------- Evidence Pages --------------*/
 
+//act i
+
 app.get('/autopsy-report', requireLogin, (req, res) => {
   if(!req.user.autopsy) {
     updateUserData(req.user.name, {autopsy: true}, unlockAct1Future);
@@ -165,6 +167,7 @@ app.get('/agitator/:article', requireLogin, (req, res) => {
       convo = true;
     }
   } else if (article == 'harbor') {
+    //contribute to unlock pt3
     convo = null;
     date = 'Dec. 13, 2037';
   } else {
@@ -183,9 +186,28 @@ app.get('/dives-dead', requireLogin, (req, res) => {
 
 //act ii
 
+app.get('/myth', requireLogin, (req, res) => {
+  if(!req.user.myth) {
+    updateUserData(req.user.name, {myth: true}, unlockAct2Future);
+  }
+  res.render('pages/myth');
+});
+
+app.get('/numerology', requireLogin, (req, res) => {
+  if(!req.user.numerology) {
+    updateUserData(req.user.name, {numerology: true}, unlockAct2Future);
+  }
+  res.render('pages/numerology');
+});
+
 app.get('/american', requireLogin, (req, res) => {
+  //contribute to unlock pt3
   res.render('pages/american');
 });
+
+app.get('/nonsense', requireLogin, (req, res) => {
+  res.render('pages/nonsense');
+})
 
 /*------------- Functions ---------------*/
 
@@ -234,7 +256,11 @@ function newUser(data, cb) {
   data.autopsy = false;
   data.alton = false;
   data.act1pt2 = false;
+  data.myth = false;
+  data.numerology = false;
   data.act2pt2 = false;
+  data.american = false;
+  data.harbor = false;
   data.act2pt3 = false;
   data.convo = [
     {'id': 1, 'start': false, 'end': false},
@@ -252,5 +278,17 @@ function newUser(data, cb) {
 function unlockAct1Future(u) {
   if(u.autopsy && u.alton) {
     updateUserData(u.name, {act1pt2: true});
+  }
+}
+
+function unlockAct2Future(u) {
+  if(u.myth && u.numerology) {
+    updateUserData(u.name, {act2pt2: true});
+  }
+}
+
+function unlockAct2Nonsense(u) {
+  if(u.american && u.harbor) {
+    updateUserData(u.name, {act2pt3: true});
   }
 }
