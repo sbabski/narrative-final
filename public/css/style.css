@@ -27,6 +27,13 @@
   display: none;
 }
 
+.note {
+  text-align: left;
+}
+
+.hidden {
+  display: none;
+}
 
 .title > img {
   height: 80px;

@@ -47,8 +47,12 @@
         } 
       }, 25);
       $('#next').on('click', function() {
-        $('#namespace').text($('#name')[0].value);
-
+        var val = $('#name')[0].value;
+        if(val != '') {
+            $('#namespace').text(val);
+            $('.hidden').removeClass('hidden');
+            $('.to-hide').addClass('hidden');
+        }
       });
     });
   </script>
