@@ -136,13 +136,13 @@ app.get('/agitator/:article', requireLogin, (req, res) => {
     //  updateUserData(req.user.name, {convo1: true});
     //}
     if(!req.user.convo[0].end) {
-      convo = true;
+      convo = false;
       if(!req.user.convo[0].start) {
         req.user.convo[0].start = true;
         updateUserData(req.user.name, {convo: req.user.convo});
       }
     } else {
-      convo = false;
+      convo = true;
     }
   } else if (article == 'harbor') {
     convo = null;
