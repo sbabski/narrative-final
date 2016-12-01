@@ -229,3 +229,26 @@ p.caption {
 .numer p.full {
   margin: 10px;
 }
+
+.non {
+  text-align: center;
+  font-size: 18px;
+}
+
+.non .rob {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+}
+
+.non .ale {
+  font-family: 'Alegreya', serif;
+}
+
+.non .ama {
+  font-family: 'Amatica SC', cursive;
+}
+
+.non img {
+  display: block;
+  margin: 0 auto;
+}
