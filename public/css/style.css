@@ -118,3 +118,8 @@ audio {
   display: block;
   margin: 3rem auto;
 }
+
+.final {
+  background-color: black;
+  color: white;
+}
