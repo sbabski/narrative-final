@@ -182,7 +182,7 @@ app.get('/agitator/:article', requireLogin, (req, res) => {
     }
   } else if (article == 'harbor') {
     if(!req.user.harbor) {
-      updateUserData(req.user.name, {harbor: true}, unlockAct2Future);
+      updateUserData(req.user.name, {harbor: true}, unlockAct2Nonsense);
     }
     convo = null;
     date = 'Dec. 13, 2037';
@@ -220,7 +220,9 @@ app.get('/american', requireLogin, (req, res) => {
   if(!req.user.american) {
     updateUserData(req.user.name, {american: true}, unlockAct2Nonsense);
   }
-  res.render('pages/american');
+  res.render('pages/american', {
+    testvar: 'hi'
+  });
 });
 
 app.get('/nonsense', requireLogin, (req, res) => {
