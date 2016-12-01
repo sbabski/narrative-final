@@ -7,12 +7,13 @@ const app = express();
 var db, currentUser, users;
 
 //values for when canvas width is 1000
-var shapeDict = {
-  'autopsy': {'url': '/autopsy-report', 'shape': [610, 120, 325, 50]}, 
+var shapeDict = [
+  {'autopsy': {'url': '/autopsy-report', 'shape': [610, 120, 325, 50]}, 
   'alton': {'url': '/alton', 'shape': [100, 100, 60, 60]},
   'anarchy': {'url': '/agitator/attack', 'shape': [400, 190, 60, 65]},
-  'abandon': {'url': '/dives-dead', 'shape': [70, 460, 60, 60]}
-};
+  'abandon': {'url': '/dives-dead', 'shape': [70, 460, 60, 60]}},
+  {}
+];
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -136,7 +137,9 @@ app.get('/alton/mayor', requireLogin, (req, res) => {
 });
 
 app.get('/alton/mayor/altered', requireLogin, (req, res) => {
-  updateUserData(req.user.name, {act: 2});
+  if(!req.user.act < 2) {
+    updateUserData(req.user.name, {act: 2});
+  }
   res.render('pages/alton', {
     mayor: true,
     altered: true
@@ -203,13 +206,10 @@ function requireLogin(req, res, next) {
 
 function buildRevisedShapes(act, act1pt2) {
   var shapes = {};
-  Object.keys(shapeDict).forEach(function(key, value) {
+  Object.keys(shapeDict[act-1]).forEach(function(key, value) {
     shapes[key] = shapeDict[key];
   });
-  if(act == 2) {
-    console.log('2');
-  }
-  if(!act1pt2) {
+  if(act == 1 && !act1pt2) {
     delete shapes.anarchy;
     delete shapes.abandon;
   }
