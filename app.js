@@ -167,6 +167,10 @@ app.post('/agitator', requireLogin, (req, res) => {
   });
 });
 
+app.get('/agitate', requireLogin, (req, res) => {
+  console.log(req.query.d);
+});
+
 app.get('/dives-dead', requireLogin, (req, res) => {
   res.render('pages/dives');
 });
