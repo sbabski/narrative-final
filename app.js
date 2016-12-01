@@ -9,8 +9,9 @@ var db, currentUser, users;
 //values for when canvas width is 1000
 var shapeDict = {
   'autopsy': {'url': '/autopsy-report', 'shape': [610, 120, 325, 50]}, 
-  'alton': {'url': '/alton', 'shape': [100, 100, 40, 40]},
-  'anarchy': {'url': '/agitator/attack', 'shape': [400, 190, 60, 65]}
+  'alton': {'url': '/alton', 'shape': [100, 100, 60, 60]},
+  'anarchy': {'url': '/agitator/attack', 'shape': [400, 190, 60, 65]},
+  'abandon': {'url': '/dives-dead', 'shape': [70, 460, 60, 60]}
 };
 
 app.use(bodyParser.json());
@@ -48,9 +49,8 @@ MongoClient.connect('mongodb://localhost:27017/', (err, database) => {
 /*------------- Routes ---------------*/
 
 app.get('/', requireLogin, (req, res) => {
-  console.log(req.user.anarchy);
   res.render('pages/index', {
-    shapes: buildRevisedShapes(req.user.anarchy)
+    shapes: buildRevisedShapes(req.user.act1pt2)
   });
 });
 
@@ -74,7 +74,8 @@ app.post('/login', (req, res) => {
 app.get('/chat', requireLogin, (req, res) => {
   res.render('pages/chat', {
     name: req.user.name,
-    convo: req.user.convo1
+    oldConvo: req.user.convo1,
+    convo: req.user.convo
   });
 });
 
@@ -95,7 +96,7 @@ app.get('/logout', (req, res) => {
 
 app.get('/autopsy-report', requireLogin, (req, res) => {
   if(!req.user.autopsy) {
-    updateUserData(req.user.name, {autopsy: true}, unlockAnarchy);
+    updateUserData(req.user.name, {autopsy: true}, unlockActII);
   }
   res.render('pages/autopsy-report');
 });
@@ -106,9 +107,6 @@ app.get('/myositis', requireLogin, (req, res) => {
 });
 
 app.get('/alton', requireLogin, (req, res) => {
-  /*if(!req.user.alton) {
-    updateUserData(req.user.name, {alton: true}, unlockAnarchy);
-  }*/
   res.render('pages/alton', {
     mayor: false
   });
@@ -116,7 +114,7 @@ app.get('/alton', requireLogin, (req, res) => {
 
 app.get('/alton/mayor', requireLogin, (req, res) => {
   if(!req.user.alton) {
-    updateUserData(req.user.name, {alton: true}, unlockAnarchy);
+    updateUserData(req.user.name, {alton: true}, unlockActII);
   }
   res.render('pages/alton', {
     mayor: true
@@ -175,20 +173,27 @@ function requireLogin(req, res, next) {
   }
 }
 
-function buildRevisedShapes(anarchy) {
+function buildRevisedShapes(act1pt2) {
   var shapes = {};
   Object.keys(shapeDict).forEach(function(key, value) {
     shapes[key] = shapeDict[key];
   });
-  if(!anarchy) delete shapes.anarchy;
+  if(!act1pt2) {
+    delete shapes.anarchy;
+    delete shapes.abandon;
+  }
   return shapes;
 }
 
 function newUser(data, cb) {
   data.autopsy = false;
   data.alton = false;
-  data.anarchy = false;
+  data.act1pt2 = false;
   data.convo1 = false;
+  data.convo = [
+    {'id': 1, 'start': false, 'end': false},
+    {'id': 2, 'start': false, 'end': false}
+  ];
   users.save(data, (err, result) => {
     if(err) return console.log(err)
     console.log('saved to database')
@@ -198,8 +203,8 @@ function newUser(data, cb) {
 
 /*------------- State-Specific Functions ---------------*/
 
-function unlockAnarchy(u) {
+function unlockActII(u) {
   if(u.autopsy && u.alton) {
-    updateUserData(u.name, {anarchy: true});
+    updateUserData(u.name, {act1pt2: true});
   }
 }

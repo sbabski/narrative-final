@@ -20,7 +20,19 @@
   <script>
     var name = <%- JSON.stringify(name) %>;
     var index = 0;
-    var timeForConvo = <%- JSON.stringify(convo) %>;
+    var timeForConvo = <%- JSON.stringify(oldConvo) %>;
+    var c = <%- JSON.stringify(convo) %>;
+    
+    var cID = -1;
+    for(i=0; i<c.length; i++) {
+      if(c[i].end) {
+        cID = i;
+      } else {
+        break;
+      }
+    }
+    console.log(cID);
+
     var convo = [
       {
         'a': 'Dragonfly439',

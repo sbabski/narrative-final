@@ -169,3 +169,7 @@ footer a {
 .alton header .links .fake-link.active {
   color: #3366CC;
 }
+
+.alton .left {
+  text-align: left;
+}
