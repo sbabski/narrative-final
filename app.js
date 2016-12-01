@@ -121,7 +121,8 @@ app.get('/myositis', requireLogin, (req, res) => {
 
 app.get('/alton', requireLogin, (req, res) => {
   res.render('pages/alton', {
-    mayor: false
+    mayor: false,
+    altered: false
   });
 });
 
@@ -130,9 +131,18 @@ app.get('/alton/mayor', requireLogin, (req, res) => {
     updateUserData(req.user.name, {alton: true}, unlockActII);
   }
   res.render('pages/alton', {
-    mayor: true
+    mayor: true,
+    altered: false
   });
-})
+});
+
+app.get('/alton/mayor/altered', requireLogin, (req, res) => {
+  //save var that allows for act ii to happen
+  res.render('pages/alton', {
+    mayor: true,
+    altered: true
+  });
+});
 
 app.get('/agitator/:article', requireLogin, (req, res) => {
   var article = req.params.article;

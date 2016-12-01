@@ -173,3 +173,12 @@ footer a {
 .alton .left {
   text-align: left;
 }
+
+.alton .alter {
+  text-transform: uppercase;
+  color: #93c47d;
+}
+
+.alton .cross {
+  text-decoration: line-through;
+}

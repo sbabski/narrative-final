@@ -21,9 +21,13 @@
   </header>
   <div class="midwidth">
       <% if(mayor) { %>
-      <% include ../partials/alton/mayor %>
+        <% if(altered) { %>
+          <% include ../partials/alton/altered %>
+        <% } else { %>    
+          <% include ../partials/alton/mayor %>
+        <% } %>
       <% } else { %>
-      <% include ../partials/alton/homepage %>
+        <% include ../partials/alton/homepage %>
       <% } %>
   </div>
 
