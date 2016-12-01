@@ -22,20 +22,17 @@
     var index = 0;
     var c = <%- JSON.stringify(convo) %>;    
     var cID = -1;
-    if(c[0].start) {
-      cID = 0;
-      for(i=0; i<c.length; i++) {
-        if(c[i].start) {
-          cID = i;
-        } else {
-          break;
-        }
+    for(i=0; i<c.length; i++) {
+      if(c[i].start) {
+        cID = i;
+      } else {
+        break;
       }
     }
 
     console.log(cID);
 
-    var convo = [
+    var c1 = [
       {
         'a': 'Dragonfly439',
         'm': 'Hello there. We’ve been expecting you.',
@@ -88,7 +85,68 @@
       }
     ];
 
+    var c2 = [   
+      {
+        'a': 'Dragonfly439',
+        'm': 'Ah there you are. Enjoying yourself?',
+        'next': [1]
+      },
+      {
+        'a': 'player',
+        'm': 'Alright stop this crap. What the hell is going on? I demand you! You think this is a game? A joke? Just a story? You think you’re so powerful? So clever? These are government matters here! You won’t be able to get away with this! They will track you down.',
+        'next': [2]
+      },
+      {
+        'a': 'Dragonfly439',
+        'm': 'Oh that’s good. Don’t flatter yourself or your government too much, they’re not nearly as adept as they lead their citizens to believe. Just as it is written, Hubris truly is a deadly sin. Always remember that.',
+        'next': [3, 4, 5]
+      },
+      {
+        'a': 'player',
+        'm': 'I could say the same of you.',
+        'next': [6]
+      },
+      {
+        'a': 'player',
+        'm': 'Can you at least skip the biblical?',
+        'next': [7]
+      },
+      {
+        'a': 'player',
+        'm': 'What do you want? What do you want me to do?',
+        'next': [8]
+      },
+      {
+        'a': 'Dragonfly439',
+        'm': 'Haha you are too funny. Or maybe you are even more naive than I assumed. You think you see, but your true eye has not been opened. The Sight will come.',
+        'next': [9]
+      },
+      {
+        'a': 'Dragonfly439',
+        'm': 'Funny. Or maybe you are even more naive than I assumed. You think you see, but your true eye has not been opened. The Sight will come.',
+        'next': [9]
+      },
+      {
+        'a': 'Dragonfly439',
+        'm': 'I want you to understand. To find knowledge and truth. There are many who are mislead, who only see what they want to, but not the world as it truly is.',
+        'next': [9]
+      },
+      {
+        'a': 'player',
+        'm': 'Okay, so how do I find this sight?',
+        'next': [10]
+      },
+      {
+        'a': 'Dragonfly439',
+        'm': '<a href=”/” target=”_blank”>Search here and within yourself. You might find that they’re not very different.</a>',
+        'next': []
+      }
+    ];
+
+    var cs = [c1, c2];
+
     if(cID > -1) {
+      var convo = cs[cID];
       AIMessage();
     }  else {
       var result = '<p><b class="no-messages">You have no current conversations.</b></p>';
