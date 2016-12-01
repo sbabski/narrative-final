@@ -9,19 +9,85 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
     <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
 </head>
-<body class="container american">
-  <header class="row">
-    <h2 class="eight columns">The St. Louis American</h2>
-    <h5 class="four columns">Wednesday, October 28, 2037</h5>
-  </header>
-  <h3>Special announcement from Chief of Police Layne Thompson</h3>
-  <div>
-      <p>Hello fellow and loyal citizens of our wonderful city. Today I am delighted to share with you news that will surely give you and your family much steadfast hope in these troubled times.<br><br>
-      As I am sure you all are aware political dissidence among your fellow citizens has been reaching an all time high. Many, particularly impressionable youths, have been entertaining a dangerous ideology that has been spread in recent times by various supposed thinkers and teachers. Do not be fooled; these people are rigidly treasonous. They are insurgents committed to destroying democracy, destroying the rights of the family, destroying this wonderful land of the free. Our youths are being corrupted by these bent rebels: they are being brainwashed with the ridiculous lie that our own democratic government, committed to the cradling of every American, is somehow becoming paranoid, somehow becoming concerned more with its own symbolic existence rather than that of its people. Do not buy into this falsity. We are not the fascists; They are.<br><br>
-      These insurgents will stop at nothing to get into the brain of your son or daughter. They corrupt them with their art, their music, and empty messages of universality. Soon your child will forsake you, run off from home and join these hooligans. They live in mass filth in underground societies, with strange music, art, drugs, sex, and rituals with no regard to any values upheld by our wonderful country for the past three centuries. Soon what seems like just fun frivolity turns to indoctrination. In no time at all your child will become a violent zombie with no cultural attachments. All of this imprudence has lead to mass disrespect for authority. People are becoming animals. Something has to be done.<br><br>
-      In order to protect our vigilant police force and in order for them to protect you and your meek family, we have taken a new measure that is supremely innovative; indeed I believe that the St. Louis Police force will set a new worldwide standard in policing. The St. Louis Police are the first to take part in a brand new program of law enforcement called the Prometheus program. The Prometheus program was carefully developed by scientists at the Kennedy Physionetics Corporation, with collaboration from the FBI and the St. Louis Police, over the past three decades. It is a program of police force enhancement. It does this through completely natural and healthy means. Officers will find themselves both mentally and physically stronger; they will be given more protection from injury, more stamina, as well as a greater intellectual capacity, giving them both sharpness and intelligence in dire situations where time is valuable and limited.<br><br>
-      The guerilla sheep claim in their dishonest tabloid, aptly titled The Agitator, that the program has and will continue to be used to keep citizens in line and ignorant and that the Prometheus program has caused excessive violence to be inflicted on innocent civilians. Do not listen to this drivel; our police know who is righteous and who is not. No errors are possible with Prometheus.<br><br>
-      We ask that you and your family be diligent, docile, and respectful during these vexing times. See something. Say something! We can and will crush these sectarian thugs and return our country to its former glory!</p>
-  </div>
+<body class="canvas-wrapper">
+    <div class="container">
+
+    </div>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function() {
+        var shapeDict = {
+          'autopsy': {'url': '/autopsy-report', 'shape': [610, 120, 325, 50]}, 
+          'mayor': {'url': '/mayor', 'shape': [100, 100, 40, 40]},
+          'anarchy': {'url': '/agitator/attack', 'shape': [400, 190, 60, 65]}
+        };
+        shapeDict = $.map(shapeDict, (k, v) => { return k; });
+
+        var canvas, ctx, img, width;
+        var over = '';
+
+        canvas = document.createElement('canvas');
+        ctx = canvas.getContext('2d');
+        $('body').prepend(canvas);
+
+        img = new Image();
+        img.src = 'public/images/cypher.jpg';
+        img.onload = function() {
+          resizing();
+          $(canvas).on('click', clickRect);
+          $(canvas).on('mousemove', checkPos);
+        };
+        $(window).resize(resizing);
+
+        function clickRect(evt) {
+          if(over != '') {
+            $(location).attr('href', over);
+          }
+        }
+
+        function checkPos(evt) {
+          for(var i = 0; i < shapeDict.length; i++) {
+            var off = $(canvas).offset();
+            var sh = shapeDict[i].shape;
+            var left = scale(sh[0]) + off.left;
+            var right = left + scale(sh[2]) + off.left;
+            var top = scale(sh[1]) + off.top;
+            var bottom = top + scale(sh[3]) + off.top;
+            var cursorStyle = 'default';
+            over = '';
+            if(evt.clientX > left && evt.clientX < right) {
+              if(evt.clientY > top && evt.clientY < bottom) {
+                over = shapeDict[i].url;
+                console.log(over)
+                cursorStyle = 'pointer';
+                break;
+              }
+            }
+          }
+          $('canvas').css('cursor', cursorStyle);
+        }
+
+        function scale(val) {
+          return val * width / 1000;
+        }
+
+        function drawSquare(arr) {
+          ctx.rect(scale(arr[0]), scale(arr[1]), scale(arr[2]), scale(arr[3]));
+          ctx.stroke();
+        }
+
+        function resizing() {
+          canvas.width = document.body.clientWidth;
+          width = canvas.width;
+          console.log(shapeDict);
+          canvas.height = img.height/img.width * canvas.width;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
+          for(var i = 0; i < shapeDict.length; i++) {
+            drawSquare(shapeDict[i].shape);
+          }
+        }
+      });
+  </script>
 </body>
 </html>

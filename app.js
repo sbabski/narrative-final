@@ -13,9 +13,9 @@ var shapeDict = {
   'anarchy': {'url': '/agitator/attack', 'shape': [400, 190, 60, 65]}
 };
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: true}))
-app.use(express.static('public'))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static('public'));
 app.use(session({
   cookieName: 'session',
   secret: 'tom-waits-is-grits',
@@ -100,11 +100,13 @@ app.get('/autopsy-report', requireLogin, (req, res) => {
   res.render('pages/autopsy-report');
 });
 
+//subpage from /autopsy-report
 app.get('/myositis', requireLogin, (req, res) => {
   res.render('pages/myositis');
 });
 
 app.get('/mayor', requireLogin, (req, res) => {
+  //add edited here
   if(!req.user.mayor) {
     updateUserData(req.user.name, {mayor: true}, unlockAnarchy);
   }
@@ -131,6 +133,11 @@ app.get('/agitator/:article', requireLogin, (req, res) => {
     article: article,
     date: date
   });
+});
+
+//subpager from /agitator/attack
+app.get('/american', requireLogin, (req, res) => {
+  res.render('pages/american');
 });
 
 /*------------- Functions ---------------*/
