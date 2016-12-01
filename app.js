@@ -158,6 +158,11 @@ app.get('/agitator/:article', requireLogin, (req, res) => {
   });
 });
 
+app.post('/agitator', requireLogin, (req, res) => {
+  //gotta save this var
+  console.log(req.body);
+});
+
 app.get('/dives-dead', requireLogin, (req, res) => {
   res.render('pages/dives');
 });
