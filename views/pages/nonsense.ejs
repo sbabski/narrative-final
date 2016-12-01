@@ -32,12 +32,6 @@
             amount: 10
           });
           openChatDelay();
-          setTimeout(function() {
-            var a = <%- JSON.stringify(article) %>;
-            var d = <%- JSON.stringify(date) %>
-            var url = '/agitate?a='+a+'&d='+d;
-            window.location.replace(url);
-          }, 5000);
         }, 1500);
       }
     });
