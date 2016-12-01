@@ -54,9 +54,13 @@ MongoClient.connect('mongodb://localhost:27017/', (err, database) => {
 /*------------- Routes ---------------*/
 
 app.get('/', requireLogin, (req, res) => {
-  res.render('pages/index', {
-    shapes: buildRevisedShapes(req.user)
-  });
+  if(req.user.act == 4){
+    res.render('pages/end');
+  } else {
+    res.render('pages/index', {
+      shapes: buildRevisedShapes(req.user)
+    });
+  }
 });
 
 app.get('/login', (req, res) => {
