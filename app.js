@@ -150,7 +150,6 @@ app.get('/agitator/:article', requireLogin, (req, res) => {
   } else {
     return res.redirect('/');
   }
-  console.log(convo);
   res.render('pages/agitator', {
     convo: convo,
     article: article,
@@ -161,6 +160,11 @@ app.get('/agitator/:article', requireLogin, (req, res) => {
 app.post('/agitator', requireLogin, (req, res) => {
   //gotta save this var
   console.log(req.body);
+  res.render('pages/agitator', {
+    convo: req.body.convo,
+    article: 'hi',
+    date:'hiiii'
+  });
 });
 
 app.get('/dives-dead', requireLogin, (req, res) => {

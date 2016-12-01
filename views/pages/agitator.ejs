@@ -59,7 +59,7 @@
             data = {'chat': null}
             $.ajax({
               type: 'POST',
-              data: JSON.stringify(dull),
+              data: JSON.stringify(data),
               contentType: 'application/json',
               url: '/agitator',            
               success: function(data) {
