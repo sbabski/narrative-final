@@ -12,7 +12,11 @@ var shapeDict = [
   'alton': {'url': '/alton', 'shape': [100, 100, 60, 60]},
   'anarchy': {'url': '/agitator/attack', 'shape': [400, 190, 60, 65]},
   'abandon': {'url': '/dives-dead', 'shape': [70, 460, 60, 60]}},
-  {}
+  {'american': {'url': '/american', 'shape': [70, 460, 60, 60]},
+  'anarchy': {'url': '/agitator/harbor', 'shape': [400, 190, 60, 65]},
+  'nonsense': {'url': '#', 'shape': [620, 100, 100, 50]},
+  'numerology': {'url': '#', 'shape': [100, 100, 60, 60]},
+  'myth': {'url': '#', 'shape': [200, 200, 60, 60]}}
 ];
 
 app.use(bodyParser.json());
@@ -109,7 +113,7 @@ app.get('/agitate', requireLogin, (req, res) => {
 
 app.get('/autopsy-report', requireLogin, (req, res) => {
   if(!req.user.autopsy) {
-    updateUserData(req.user.name, {autopsy: true}, unlockActII);
+    updateUserData(req.user.name, {autopsy: true}, unlockAct1Future);
   }
   res.render('pages/autopsy-report');
 });
@@ -128,7 +132,7 @@ app.get('/alton', requireLogin, (req, res) => {
 
 app.get('/alton/mayor', requireLogin, (req, res) => {
   if(!req.user.alton) {
-    updateUserData(req.user.name, {alton: true}, unlockActII);
+    updateUserData(req.user.name, {alton: true}, unlockAct1Future);
   }
   res.render('pages/alton', {
     mayor: true,
@@ -178,6 +182,7 @@ app.get('/dives-dead', requireLogin, (req, res) => {
 });
 
 //act ii
+
 app.get('/american', requireLogin, (req, res) => {
   res.render('pages/american');
 });
@@ -212,6 +217,14 @@ function buildRevisedShapes(act, act1pt2) {
   if(act == 1 && !act1pt2) {
     delete shapes.anarchy;
     delete shapes.abandon;
+  } else if(act == 2) {
+    if(!act2pt2) {
+      delete shapes.anarchy;
+      delete shapes.american;
+    }
+    if(!act2pt3) {
+      delete shapes.nonsense;
+    }
   }
   return shapes;
 }
@@ -221,6 +234,8 @@ function newUser(data, cb) {
   data.autopsy = false;
   data.alton = false;
   data.act1pt2 = false;
+  data.act2pt2 = false;
+  data.act2pt3 = false;
   data.convo = [
     {'id': 1, 'start': false, 'end': false},
     {'id': 2, 'start': false, 'end': false}
@@ -234,7 +249,7 @@ function newUser(data, cb) {
 
 /*------------- State-Specific Functions ---------------*/
 
-function unlockActII(u) {
+function unlockAct1Future(u) {
   if(u.autopsy && u.alton) {
     updateUserData(u.name, {act1pt2: true});
   }
