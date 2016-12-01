@@ -118,6 +118,10 @@ app.get('/nonsensical', requireLogin, (req, res) => {
   });
 });
 
+app.get('/final', requireLogin, (req, res) => {
+  res.render('pages/final');
+});
+
 
 /*--------------- Evidence Pages --------------*/
 
