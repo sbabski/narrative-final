@@ -80,8 +80,7 @@ app.get('/chat', requireLogin, (req, res) => {
 });
 
 app.post('/chat', requireLogin, (req, res) => {
-  //gotta save this var
-  console.log(req.body);
+  updateUserData(req.user.name, {convos: req.body}, unlockActII);
 });
 
 app.get('/dropdb', (req, res) => {
