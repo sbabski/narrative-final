@@ -32,6 +32,10 @@
             amount: 10
           });
           openChatDelay();
+          setTimeout(function() {
+            var url = '/nonsensical';
+            window.location.replace(url);
+          }, 5000);
         }, 1500);
       }
     });

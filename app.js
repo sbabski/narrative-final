@@ -108,6 +108,12 @@ app.get('/agitate', requireLogin, (req, res) => {
   });
 });
 
+app.get('/nonsensical', requireLogin, (req, res) => {
+  res.render('pages/nonsense', {
+    convo: null,
+  });
+});
+
 
 /*--------------- Evidence Pages --------------*/
 
@@ -223,7 +229,14 @@ app.get('/nonsense', requireLogin, (req, res) => {
   res.render('pages/nonsense', {
     convo: convo
   });
-})
+});
+
+app.get('/nonsense-next', requireLogin, (req, res) => {
+  if(!req.user.act < 3) {
+    updateUserData(req.user.name, {act: 4});
+  }
+  res.redirect('/');
+});
 
 /*------------- Functions ---------------*/
 
