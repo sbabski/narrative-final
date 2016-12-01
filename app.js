@@ -74,7 +74,7 @@ app.post('/login', (req, res) => {
 app.get('/chat', requireLogin, (req, res) => {
   res.render('pages/chat', {
     name: req.user.name,
-    oldConvo: req.user.convo1,
+    //oldConvo: req.user.convo1,
     convo: req.user.convo
   });
 });
@@ -129,15 +129,19 @@ app.get('/agitator/:article', requireLogin, (req, res) => {
   var article = req.params.article;
   var convo, date;
   if(article == 'attack') {
-    //if convo1.end is true, convo is true. else false;
-    convo = req.user.convo1;
+    //convo = req.user.convo1;
     date = 'Oct. 26, 2037'
-    if(convo == false) {
-      updateUserData(req.user.name, {convo1: true});
-    }
-    if(!req.user.convo[0].start) {
-      req.user.convo[0].start = true;
-      updateUserData(req.user.name, {convo: req.user.convo});
+    //if(convo == false) {
+    //  updateUserData(req.user.name, {convo1: true});
+    //}
+    if(!req.user.convo[0].end) {
+      convo = true;
+      if(!req.user.convo[0].start) {
+        req.user.convo[0].start = true;
+        updateUserData(req.user.name, {convo: req.user.convo});
+      }
+    } else {
+      convo = false;
     }
   } else if (article == 'harbor') {
     convo = null;
@@ -199,7 +203,7 @@ function newUser(data, cb) {
   data.autopsy = false;
   data.alton = false;
   data.act1pt2 = false;
-  data.convo1 = false;
+  //data.convo1 = false;
   data.convo = [
     {'id': 1, 'start': false, 'end': false},
     {'id': 2, 'start': false, 'end': false}
