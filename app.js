@@ -50,7 +50,7 @@ MongoClient.connect('mongodb://localhost:27017/', (err, database) => {
 
 app.get('/', requireLogin, (req, res) => {
   res.render('pages/index', {
-    shapes: buildRevisedShapes(req.user.act1pt2)
+    shapes: buildRevisedShapes(req.user.act, req.user.act1pt2)
   });
 });
 
@@ -74,7 +74,6 @@ app.post('/login', (req, res) => {
 app.get('/chat', requireLogin, (req, res) => {
   res.render('pages/chat', {
     name: req.user.name,
-    //oldConvo: req.user.convo1,
     convo: req.user.convo
   });
 });
@@ -137,7 +136,7 @@ app.get('/alton/mayor', requireLogin, (req, res) => {
 });
 
 app.get('/alton/mayor/altered', requireLogin, (req, res) => {
-  //save var that allows for act ii to happen
+  updateUserData(req.user.name, {act: 2});
   res.render('pages/alton', {
     mayor: true,
     altered: true
@@ -148,11 +147,7 @@ app.get('/agitator/:article', requireLogin, (req, res) => {
   var article = req.params.article;
   var convo, date;
   if(article == 'attack') {
-    //convo = req.user.convo1;
     date = 'Oct. 26, 2037'
-    //if(convo == false) {
-    //  updateUserData(req.user.name, {convo1: true});
-    //}
     if(!req.user.convo[0].end) {
       convo = false;
       if(!req.user.convo[0].start) {
@@ -206,11 +201,14 @@ function requireLogin(req, res, next) {
   }
 }
 
-function buildRevisedShapes(act1pt2) {
+function buildRevisedShapes(act, act1pt2) {
   var shapes = {};
   Object.keys(shapeDict).forEach(function(key, value) {
     shapes[key] = shapeDict[key];
   });
+  if(act == 2) {
+    console.log('2');
+  }
   if(!act1pt2) {
     delete shapes.anarchy;
     delete shapes.abandon;
@@ -219,12 +217,10 @@ function buildRevisedShapes(act1pt2) {
 }
 
 function newUser(data, cb) {
-  data.act1 = true;
+  data.act = 1;
   data.autopsy = false;
   data.alton = false;
   data.act1pt2 = false;
-  data.act2 = false;
-  //data.convo1 = false;
   data.convo = [
     {'id': 1, 'start': false, 'end': false},
     {'id': 2, 'start': false, 'end': false}
