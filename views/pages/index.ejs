@@ -12,60 +12,74 @@
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
   <script>
     $(document).ready(function() {
-        var shapeDict = <%- JSON.stringify(shapes) %>;
-        shapeDict = $.map(shapeDict, (k, v) => { return k; });
+      var shapeDict = <%- JSON.stringify(shapes) %>;
+      shapeDict = $.map(shapeDict, (k, v) => { return k; });
 
-        var canvas, ctx, img, width;
+      var canvas, ctx, img, width;
+      var over = '';
 
-        canvas = document.createElement('canvas');
-        ctx = canvas.getContext('2d');
-        $('body').prepend(canvas);
+      canvas = document.createElement('canvas');
+      ctx = canvas.getContext('2d');
+      $('body').prepend(canvas);
 
-        img = new Image();
-        img.src = '/images/cypher.jpg';
-        img.onload = function() {
-          resizing();
-          $(canvas).on('click', checkPos);
-        };
-        $(window).resize(resizing);
+      img = new Image();
+      img.src = 'public/images/cypher.jpg';
+      img.onload = function() {
+        resizing();
+        $(canvas).on('click', clickRect);
+        $(canvas).on('mousemove', checkPos);
+      };
+      $(window).resize(resizing);
 
-        function checkPos(evt) {
-          for(var i = 0; i < shapeDict.length; i++) {
-            var off = $(canvas).offset();
-            var sh = shapeDict[i].shape;
-            var left = scale(sh[0]) + off.left;
-            var right = left + scale(sh[2]) + off.left;
-            var top = scale(sh[1]) + off.top;
-            var bottom = top + scale(sh[3]) + off.top;
-            if(evt.clientX > left && evt.clientX < right) {
-              if(evt.clientY > top && evt.clientY < bottom) {
-                $(location).attr('href', shapeDict[i].url);
-              }
+      function clickRect(evt) {
+        if(over != '') {
+          $(location).attr('href', over);
+        }
+      }
+
+      function checkPos(evt) {
+        for(var i = 0; i < shapeDict.length; i++) {
+          var off = $(canvas).offset();
+          var sh = shapeDict[i].shape;
+          var left = scale(sh[0]) + off.left;
+          var right = left + scale(sh[2]) + off.left;
+          var top = scale(sh[1]) + off.top;
+          var bottom = top + scale(sh[3]) + off.top;
+          var cursorStyle = 'default';
+          over = '';
+          if(evt.clientX > left && evt.clientX < right) {
+            if(evt.clientY > top && evt.clientY < bottom) {
+              over = shapeDict[i].url;
+              console.log(over)
+              cursorStyle = 'pointer';
+              break;
             }
           }
         }
+        $('canvas').css('cursor', cursorStyle);
+      }
 
-        function scale(val) {
-          return val * width / 1000;
-        }
+      function scale(val) {
+        return val * width / 1000;
+      }
 
-        function drawSquare(arr) {
-          ctx.rect(scale(arr[0]), scale(arr[1]), scale(arr[2]), scale(arr[3]));
-          ctx.stroke();
-        }
+      function drawSquare(arr) {
+        ctx.rect(scale(arr[0]), scale(arr[1]), scale(arr[2]), scale(arr[3]));
+        ctx.stroke();
+      }
 
-        function resizing() {
-          canvas.width = document.body.clientWidth;
-          width = canvas.width;
-          console.log(shapeDict);
-          canvas.height = img.height/img.width * canvas.width;
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
-          for(var i = 0; i < shapeDict.length; i++) {
-            drawSquare(shapeDict[i].shape);
-          }
+      function resizing() {
+        canvas.width = document.body.clientWidth;
+        width = canvas.width;
+        console.log(shapeDict);
+        canvas.height = img.height/img.width * canvas.width;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
+        for(var i = 0; i < shapeDict.length; i++) {
+          drawSquare(shapeDict[i].shape);
         }
-      });
+      }
+    });
   </script>
 </body>
 </html>

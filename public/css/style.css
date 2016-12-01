@@ -64,7 +64,52 @@ footer {
   margin: 2rem 0;
 }
 
-.american header h5 {
+.american header h5, .dead h5 {
   font-size: 1.75rem;
   margin-top: 2.3rem;
+}
+
+.dead {
+  font-family: Arial, Tahoma, Helvetica, sans-serif;
+  background: black;
+  color: white;
+  margin: 2.5rem auto;
+}
+
+.dead h2 {
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+.dead .entry {
+  background-color: #141414;
+  border: 1px solid #222222;
+}
+
+.dead .date, .dead .footer {
+  margin: 0;
+  padding: 1rem;
+}
+
+.dead .date, .dead .footer .dark {
+  color: #666666;
+}
+
+.dead .date, .dead .article {
+  border-bottom: 1px solid #000000;
+}
+
+.dead .article, .dead .footer {
+  border-top: 1px solid #222222;
+  padding: 1rem;
+}
+
+.dead h5 {
+  text-align: center;
+}
+
+.dead img {
+  width: 80%;
+  display: block;
+  margin: 5rem auto;
 }

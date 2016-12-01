@@ -135,7 +135,11 @@ app.get('/agitator/:article', requireLogin, (req, res) => {
   });
 });
 
-//subpager from /agitator/attack
+app.get('/dives', requireLogin, (req, res) => {
+  res.render('pages/dives');
+});
+
+//act ii
 app.get('/american', requireLogin, (req, res) => {
   res.render('pages/american');
 });
