@@ -9,7 +9,7 @@ var db, currentUser, users;
 //values for when canvas width is 1000
 var shapeDict = {
   'autopsy': {'url': '/autopsy-report', 'shape': [610, 120, 325, 50]}, 
-  'mayor': {'url': '/mayor', 'shape': [100, 100, 40, 40]},
+  'alton': {'url': '/alton', 'shape': [100, 100, 40, 40]},
   'anarchy': {'url': '/agitator/attack', 'shape': [400, 190, 60, 65]}
 };
 
@@ -105,12 +105,12 @@ app.get('/myositis', requireLogin, (req, res) => {
   res.render('pages/myositis');
 });
 
-app.get('/mayor', requireLogin, (req, res) => {
+app.get('/alton', requireLogin, (req, res) => {
   //add edited here
-  if(!req.user.mayor) {
-    updateUserData(req.user.name, {mayor: true}, unlockAnarchy);
+  if(!req.user.alton) {
+    updateUserData(req.user.name, {alton: true}, unlockAnarchy);
   }
-  res.render('pages/mayor');
+  res.render('pages/alton');
 });
 
 app.get('/agitator/:article', requireLogin, (req, res) => {
@@ -176,7 +176,7 @@ function buildRevisedShapes(anarchy) {
 
 function newUser(data, cb) {
   data.autopsy = false;
-  data.mayor = false;
+  data.alton = false;
   data.anarchy = false;
   data.convo1 = false;
   users.save(data, (err, result) => {
@@ -189,7 +189,7 @@ function newUser(data, cb) {
 /*------------- State-Specific Functions ---------------*/
 
 function unlockAnarchy(u) {
-  if(u.autopsy && u.mayor) {
+  if(u.autopsy && u.alton) {
     updateUserData(u.name, {anarchy: true});
   }
 }

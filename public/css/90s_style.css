@@ -138,3 +138,34 @@ footer a {
 .midwidth img {
   width: 100%;
 }
+
+.alton {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.alton header {
+  background-color: #E6F3FF;
+  padding: 2rem;
+}
+
+.alton p {
+  font-family: Times, serif;
+}
+
+.alton header .title, .alton header .links {
+  display: inline-block;
+}
+
+.alton header .links {
+  margin-left: 5rem;
+}
+
+.alton header .links .fake-link {
+  font-size: 18px;
+  margin: 5px;
+}
+
+.alton header .links .fake-link.active {
+  color: #3366CC;
+}
