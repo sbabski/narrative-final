@@ -55,7 +55,7 @@ MongoClient.connect('mongodb://localhost:27017/', (err, database) => {
 
 app.get('/', requireLogin, (req, res) => {
   res.render('pages/index', {
-    shapes: buildRevisedShapes(req.user.act, req.user.act1pt2)
+    shapes: buildRevisedShapes(req.user)
   });
 });
 
@@ -209,20 +209,20 @@ function requireLogin(req, res, next) {
   }
 }
 
-function buildRevisedShapes(act, act1pt2) {
+function buildRevisedShapes(u) {
   var shapes = {};
   Object.keys(shapeDict[act-1]).forEach(function(key, value) {
     shapes[key] = shapeDict[key];
   });
-  if(act == 1 && !act1pt2) {
+  if(u.act == 1 && !u.act1pt2) {
     delete shapes.anarchy;
     delete shapes.abandon;
-  } else if(act == 2) {
-    if(!act2pt2) {
+  } else if(u.act == 2) {
+    if(!u.act2pt2) {
       delete shapes.anarchy;
       delete shapes.american;
     }
-    if(!act2pt3) {
+    if(!u.act2pt3) {
       delete shapes.nonsense;
     }
   }
