@@ -113,3 +113,8 @@ footer {
   display: block;
   margin: 5rem auto;
 }
+
+audio {
+  display: block;
+  margin: 3rem auto;
+}

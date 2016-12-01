@@ -167,7 +167,9 @@ app.get('/agitator/:article', requireLogin, (req, res) => {
       convo = true;
     }
   } else if (article == 'harbor') {
-    //contribute to unlock pt3
+    if(!req.user.harbor) {
+      updateUserData(req.user.name, {harbor: true}, unlockAct2Future);
+    }
     convo = null;
     date = 'Dec. 13, 2037';
   } else {
@@ -201,7 +203,9 @@ app.get('/numerology', requireLogin, (req, res) => {
 });
 
 app.get('/american', requireLogin, (req, res) => {
-  //contribute to unlock pt3
+  if(!req.user.american) {
+    updateUserData(req.user.name, {american: true}, unlockAct2Nonsense);
+  }
   res.render('pages/american');
 });
 
