@@ -80,6 +80,7 @@ app.get('/chat', requireLogin, (req, res) => {
 });
 
 app.post('/chat', requireLogin, (req, res) => {
+  //gotta save this var
   console.log(req.body);
 });
 
@@ -149,6 +150,7 @@ app.get('/agitator/:article', requireLogin, (req, res) => {
   } else {
     return res.redirect('/');
   }
+  console.log(convo);
   res.render('pages/agitator', {
     convo: convo,
     article: article,
