@@ -210,7 +210,19 @@ app.get('/american', requireLogin, (req, res) => {
 });
 
 app.get('/nonsense', requireLogin, (req, res) => {
-  res.render('pages/nonsense');
+  var convo;
+  if(!req.user.convo[1].end) {
+    convo = false;
+    if(!req.user.convo[1].start) {
+      req.user.convo[1].start = true;
+      updateUserData(req.user.name, {convo: req.user.convo});
+    }
+  } else {
+    convo = true;
+  }
+  res.render('pages/nonsense', {
+    convo: convo
+  });
 })
 
 /*------------- Functions ---------------*/
