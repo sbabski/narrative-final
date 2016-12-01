@@ -56,8 +56,9 @@
           openChatDelay();
           setTimeout(function() {
             //ajax post, reroute without chat var
-            data = {'chat': null}
-            $.ajax({
+            var url = '/agitate?c='+null+'a='+<%- JSON.stringify(article) %>+'d='+<%- JSON.stringify(convo) %>;
+            window.location.replace(urlString);
+            /*$.ajax({
               type: 'POST',
               data: JSON.stringify(data),
               contentType: 'application/json',
@@ -65,7 +66,7 @@
               success: function(data) {
                 console.log('success');
               }
-            });
+            });*/
             //location.reload();
           }, 5000);
         }, 1500);
