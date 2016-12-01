@@ -135,7 +135,7 @@ app.get('/agitator/:article', requireLogin, (req, res) => {
   });
 });
 
-app.get('/dives', requireLogin, (req, res) => {
+app.get('/dives-dead', requireLogin, (req, res) => {
   res.render('pages/dives');
 });
 
