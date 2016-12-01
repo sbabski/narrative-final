@@ -32,7 +32,6 @@
         }
       }
     }
-    console.log(cID);
 
     var convo = [
       {
@@ -118,14 +117,11 @@
         $('#toSend').append($res);
         $res.click(sendMessage);
       } else {
-
-        var data = {};
-        data.title = "title";
-        data.message = "message";
+        c[cID].end = true;
           
         $.ajax({
           type: 'POST',
-          data: JSON.stringify(data),
+          data: JSON.stringify(c),
           contentType: 'application/json',
           url: '/chat',            
           success: function(data) {
