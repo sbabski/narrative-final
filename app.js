@@ -211,8 +211,8 @@ function requireLogin(req, res, next) {
 
 function buildRevisedShapes(u) {
   var shapes = {};
-  Object.keys(shapeDict[act-1]).forEach(function(key, value) {
-    shapes[key] = shapeDict[key];
+  Object.keys(shapeDict[u.act-1]).forEach(function(key, value) {
+    shapes[key] = shapeDict[u.act-1][key];
   });
   if(u.act == 1 && !u.act1pt2) {
     delete shapes.anarchy;
