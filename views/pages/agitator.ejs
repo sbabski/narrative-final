@@ -55,19 +55,10 @@
           });
           openChatDelay();
           setTimeout(function() {
-            //ajax post, reroute without chat var
-            var url = '/agitate?c='+null+'&ampa='+<%- JSON.stringify(article) %>+'&ampd='+<%- JSON.stringify(convo) %>;
+            var a = <%- JSON.stringify(article) %>;
+            var d = <%- JSON.stringify(date) %>
+            var url = '/agitate?c='+null+'&a='+a+'&d='+d;
             window.location.replace(url);
-            /*$.ajax({
-              type: 'POST',
-              data: JSON.stringify(data),
-              contentType: 'application/json',
-              url: '/agitator',            
-              success: function(data) {
-                console.log('success');
-              }
-            });*/
-            //location.reload();
           }, 5000);
         }, 1500);
       }

@@ -97,6 +97,16 @@ app.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
+app.get('/agitate', requireLogin, (req, res) => {
+  console.log(req.query.d);
+  /*res.render('pages/agitator', {
+    convo: convo,
+    article: article,
+    date: date
+  });*/
+});
+
+
 /*--------------- Evidence Pages --------------*/
 
 app.get('/autopsy-report', requireLogin, (req, res) => {
@@ -157,20 +167,6 @@ app.get('/agitator/:article', requireLogin, (req, res) => {
   });
 });
 
-app.post('/agitator', requireLogin, (req, res) => {
-  //gotta save this var
-  console.log(req.body);
-  res.render('pages/agitator', {
-    convo: req.body.convo,
-    article: 'hi',
-    date:'hiiii'
-  });
-});
-
-app.get('/agitate', requireLogin, (req, res) => {
-  console.log(req.query.d);
-});
-
 app.get('/dives-dead', requireLogin, (req, res) => {
   res.render('pages/dives');
 });
@@ -215,9 +211,11 @@ function buildRevisedShapes(act1pt2) {
 }
 
 function newUser(data, cb) {
+  data.act1 = true;
   data.autopsy = false;
   data.alton = false;
   data.act1pt2 = false;
+  data.act2 = false;
   //data.convo1 = false;
   data.convo = [
     {'id': 1, 'start': false, 'end': false},
