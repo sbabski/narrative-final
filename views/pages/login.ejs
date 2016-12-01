@@ -11,15 +11,15 @@
         <div class="eight columns offset-by-two">
           <h1 class="center-text">Cypher</h1>
           <div class="note">
-            <p>Detective,</p>
+            <p>Detective <span id="namespace"></span>,</p>
             <p>Here’s the cypher our boys found on that stiff out in the woods outside of town. Nobody at the department can make heads or tails of it. We know you have some background in cryptography, maybe you can have a crack at it?</p>
             <p><em>-Officer M</em></p>
           </div>
 
           <h5 class="center-text">Enter your name to begin:</h5>
           <form class="center-text" action="/login" method="POST">
-            <input type="text" name="name">
-            <button id="next">Submit</button>
+            <input type="text" name="name" id="name">
+            <button id="next" type="button">Submit</button>
             <button type="submit">Begin</button>
           </form>
 	  <div class="popup">
@@ -44,7 +44,8 @@
         } 
       }, 25);
       $('#next').on('click', function() {
-        console.log('clicked');
+        console.log($('#name')[0].value);
+        $('#namespace').text($('#name')[0].value);
       });
     });
   </script>
