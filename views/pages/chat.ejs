@@ -31,7 +31,6 @@
         break;
       }
     }
-    console.log(cID);
 
     var convo = [
       {
@@ -86,7 +85,7 @@
       }
     ];
 
-    if(timeForConvo) {
+    if(cID > -1) {
       AIMessage();
     }  else {
       var result = '<p><b class="no-messages">You have no current conversations.</b></p>';
