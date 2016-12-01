@@ -99,11 +99,11 @@ app.get('/logout', (req, res) => {
 
 app.get('/agitate', requireLogin, (req, res) => {
   console.log(req.query.d);
-  /*res.render('pages/agitator', {
-    convo: convo,
-    article: article,
-    date: date
-  });*/
+  res.render('pages/agitator', {
+    convo: null,
+    article: req.query.a,
+    date: req.query.d
+  });
 });
 
 
