@@ -14,9 +14,9 @@ var shapeDict = [
   'abandon': {'url': '/dives-dead', 'shape': [125, 430, 120, 60]}},
   {'american': {'url': '/american', 'shape': [595, 300, 115, 60]},
   'anarchy': {'url': '/agitator/harbor', 'shape': [425, 285, 65, 70]},
-  'nonsense': {'url': '#', 'shape': [230, 455, 140, 85]},
-  'numerology': {'url': '#', 'shape': [40, 240, 75, 75]},
-  'myth': {'url': '#', 'shape': [715, 450, 100, 70]}}
+  'nonsense': {'url': '/nonsense', 'shape': [230, 455, 140, 85]},
+  'numerology': {'url': '/numerology', 'shape': [40, 240, 75, 75]},
+  'myth': {'url': '/myth', 'shape': [715, 450, 100, 70]}}
 ];
 
 app.use(bodyParser.json());

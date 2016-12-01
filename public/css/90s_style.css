@@ -182,3 +182,50 @@ footer a {
 .alton .cross {
   text-decoration: line-through;
 }
+
+p.caption {
+  text-align: center;
+  font-size: 14px;
+  margin: 0;
+}
+
+.numer {
+  font-family: 'Merienda', cursive;
+  border: 1px solid #000;
+  margin: 5rem auto;
+}
+
+.numer header {
+  padding: 2rem;
+  text-align: center;
+  background-color: #C8A2C8;
+}
+
+.numer h3, .numer p {
+  font-family: Times, serif;
+}
+
+.numer p {
+  text-align: justify;
+}
+
+.numer p.caption {
+  text-align: center;
+}
+
+.numer .main {
+  margin: 10px;
+}
+
+.numer.midwidth .half {
+  width: 417px;
+}
+
+.numer .wrapper {
+  border-bottom: 1px solid #000;
+  display: block;
+}
+
+.numer p.full {
+  margin: 10px;
+}
