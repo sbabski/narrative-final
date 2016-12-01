@@ -46,8 +46,8 @@ MongoClient.connect('mongodb://localhost:27017/', (err, database) => {
   users = db.collection('users');
   if (err) return console.log(err)
   console.log('successfully connected to the database');
-  app.listen(5000, () => {
-    console.log('listening on 5000')
+  app.listen(3000, () => {
+    console.log('listening on 3000')
   })
 });
 
