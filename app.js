@@ -106,12 +106,22 @@ app.get('/myositis', requireLogin, (req, res) => {
 });
 
 app.get('/alton', requireLogin, (req, res) => {
-  //add edited here
+  /*if(!req.user.alton) {
+    updateUserData(req.user.name, {alton: true}, unlockAnarchy);
+  }*/
+  res.render('pages/alton', {
+    mayor: false
+  });
+});
+
+app.get('/alton/mayor', requireLogin, (req, res) => {
   if(!req.user.alton) {
     updateUserData(req.user.name, {alton: true}, unlockAnarchy);
   }
-  res.render('pages/alton');
-});
+  res.render('pages/alton', {
+    mayor: true
+  });
+})
 
 app.get('/agitator/:article', requireLogin, (req, res) => {
   var article = req.params.article;
