@@ -19,7 +19,29 @@
   <% include ../partials/90s_footer %>
 
   <% if(convo != null) { %>
-    <% include ../partials/convo_opener %>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+  <script src="/vendor/html2canvas.js"></script>
+  <script src="/vendor/glitch.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      var convo = <%- JSON.stringify(convo) %>;
+      if(convo == false) {
+        setTimeout(function() {
+          $('body').glitch('replace', {
+            amount: 10
+          });
+          openChatDelay();
+          setTimeout(function() {
+            var a = <%- JSON.stringify(article) %>;
+            var d = <%- JSON.stringify(date) %>
+            var url = '/agitate?a='+a+'&d='+d;
+            window.location.replace(url);
+          }, 5000);
+        }, 1500);
+      }
+    });
+  </script>
   <% } %>
 </body>
 </html>
