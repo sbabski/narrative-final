@@ -53,18 +53,10 @@
           $('body').glitch('replace', {
             amount: 10
           });
-          /*setTimeout(function() {
-            var chat = window.open('/chat', 'Chat', 'width=400, height=400');
-            if(chat) {
-                if(chat.closed == false) {
-                  chat.close();
-                }
-                window.open('/chat', 'Chat', 'width=400, height=400');
-            } else {
-                console.log('blocked');
-            }
-          }, 3000);*/
           openChatDelay();
+          setTimeout(function() {
+            location.reload();
+          }, 4000);
         }, 1500);
       }
     });
