@@ -125,7 +125,7 @@ app.get('/agitator/:article', requireLogin, (req, res) => {
   var article = req.params.article;
   var convo, date;
   if(article == 'attack') {
-    //make convo.1.start true
+    //if convo1.end is true, convo is true. else false;
     convo = req.user.convo1;
     date = 'Oct. 26, 2037'
     if(convo == false) {
@@ -133,9 +133,6 @@ app.get('/agitator/:article', requireLogin, (req, res) => {
     }
     if(!req.user.convo[0].start) {
       req.user.convo[0].start = true;
-      var testFunc(u) {
-        console.log(u);
-      }
       updateUserData(req.user.name, {convo: req.user.convo});
     }
   } else if (article == 'harbor') {

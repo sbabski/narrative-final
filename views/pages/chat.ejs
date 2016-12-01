@@ -20,15 +20,16 @@
   <script>
     var name = <%- JSON.stringify(name) %>;
     var index = 0;
-    var timeForConvo = <%- JSON.stringify(oldConvo) %>;
     var c = <%- JSON.stringify(convo) %>;
     
     var cID = -1;
-    for(i=0; i<c.length; i++) {
-      if(c[i].end) {
-        cID = i;
-      } else {
-        break;
+    if(c[0].start) {
+      for(i=0; i<c.length; i++) {
+        if(c[i].end) {
+          cID = i;
+        } else {
+          break;
+        }
       }
     }
 
@@ -118,6 +119,7 @@
     function AIMessage() {
       putInRead();
       setTimeout(putInSend, 1000);
+      console.log('here');
     }
 
     function sendMessage() {
