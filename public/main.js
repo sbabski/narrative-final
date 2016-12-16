@@ -17,3 +17,9 @@ function openChat() {
         console.log('blocked');
     }
 }
+
+
+function reset() {
+    return confirm('Are you sure? All of your progress will be lost.');
+}
+
