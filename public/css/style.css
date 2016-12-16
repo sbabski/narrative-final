@@ -9,11 +9,19 @@
   text-align: left;
   color: #6aa84f;
   font-family: 'Courier New', sans-serif;
+  font-size: 16px;
   margin-top: 50px;
 }
 
 .anarchist p.up {
   margin-top: 0;
+}
+
+.anarchist p.caption {
+  text-align: center;
+  font-size: 15px;
+  font-style: italic;
+  margin-top: 20px;
 }
 
 .row.spaced {
