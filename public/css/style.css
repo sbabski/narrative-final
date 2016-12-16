@@ -185,3 +185,25 @@ audio {
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
 }
+
+.thompson {
+  background-image: url('../images/city_bg.jpg');
+  background-size: cover;
+  color: white;
+}
+
+.thompson p {
+  text-align: justify;
+  background-color: rgba(100, 100, 100, 0.75);
+  padding: 2rem;
+  margin-bottom: 0;
+}
+
+.thompson img {
+  margin: 2rem 0;
+}
+
+.thompson h1 {
+  margin-bottom: 0;
+  font-family: 'Teko', sans-serif;
+}

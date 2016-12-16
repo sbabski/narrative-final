@@ -1,17 +1,10 @@
-
-
-<!-- layne thompson, leaked use + agitator, autopsy report -> dragonfly -->
+<!-- views/pages/thompson.ejs -->
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Prototype</title>
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
-    <link rel="stylesheet" href="public/css/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Teko" rel="stylesheet">
+  <% include ../partials/head %>
+  <link href="https://fonts.googleapis.com/css?family=Teko" rel="stylesheet">
 </head>
 <body class="thompson container">
   <div class="row spaced">
@@ -19,17 +12,15 @@
   </div>
   <div class="row spaced">
     <div class="six columns">
-      <img src="./public/images/bryant.png" class="full"/>
+      <img src="/images/bryant.png" class="full"/>
     </div>
     <div class="six columns">
       <p>Chief Thompson is a model citizen for St. Louis. After serving dutifully as an Alderman in the city and then as mayor of nearby West Alton, Chief Thompson found his calling in police service, and entered the force in 2007. He was a dedicated officer, uncompromising in his defence of law and order. He was promoted to lieutenant in 2022, and soon after the tragic and sudden death of the honorable Chief Rachel Jackson, he selflessly offered to take her position as chief of police. He has been a valiant defender of the city as chief of police, protecting us against the various insurgent forces who would seek to undermine the safety of our city and its citizens. His most recent project, a biological enhancement program called Prometheus, represents his vision for a peaceful and prosperous St. Louis, with his enhanced police force as its brave guardians.</p>
     </div>
   </div>
+
   <div class="row spaced">
     <% include ../partials/footer %>
   </div>
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
-  <script>
-  </script>
 </body>
 </html>
