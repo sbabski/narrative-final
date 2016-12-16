@@ -3,10 +3,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('client-sessions');
 const dialogue = require('dialoguejs');
+const shapeData = require('shapes.json');
 const app = express();
 var db, currentUser, users;
 
 //values for when canvas width is 1000
+
+console.log(shapeData);
 var shapeDict = [
   {'autopsy': {'url': '/autopsy-report', 'shape': [650, 225, 325, 70]}, 
   'alton': {'url': '/alton', 'shape': [40, 140, 120, 80]},
