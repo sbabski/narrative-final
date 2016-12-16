@@ -106,6 +106,11 @@ app.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
+app.get('/reset', requireLogin, (req, res) => {
+  updateUserData(req.user.name, blankUser())
+  res.redirect('/');
+});
+
 app.get('/agitate', requireLogin, (req, res) => {
   res.render('pages/agitator', {
     convo: null,
@@ -293,6 +298,16 @@ function buildRevisedShapes(u) {
 }
 
 function newUser(data, cb) {
+  blankUser(data);
+  users.save(data, (err, result) => {
+    if(err) return console.log(err)
+    console.log('saved to database')
+    cb(data);
+  });
+}
+
+function blankUser(data) {
+  if(!data) data = {};
   data.act = 1;
   data.autopsy = false;
   data.alton = false;
@@ -307,11 +322,6 @@ function newUser(data, cb) {
     {'id': 1, 'start': false, 'end': false},
     {'id': 2, 'start': false, 'end': false}
   ];
-  users.save(data, (err, result) => {
-    if(err) return console.log(err)
-    console.log('saved to database')
-    cb(data);
-  });
 }
 
 /*------------- State-Specific Functions ---------------*/
