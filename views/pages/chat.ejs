@@ -22,6 +22,7 @@
     var index = 0;
     var c = <%- JSON.stringify(convo) %>;    
     var cID = -1;
+    var convo;
 
     for(i=0; i<c.length; i++) {
       if(c[i].start) {
@@ -33,7 +34,7 @@
 
     $.getJSON('chat.json', function(response) {
       if(cID > -1) {
-        var convo = response[cID];
+        convo = response[cID];
         AIMessage();
       }  else {
         var result = '<p><b class="no-messages">You have no current conversations.</b></p>';
