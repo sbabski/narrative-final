@@ -80,6 +80,8 @@ app.post('/login', (req, res) => {
   });
 });
 
+
+//wrong chat pops up after second is started
 app.get('/chat', requireLogin, (req, res) => {
   res.render('pages/chat', {
     name: req.user.name,

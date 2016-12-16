@@ -4,22 +4,65 @@
     <meta charset="UTF-8">
     <title>Cypher</title>
     <style>
-      body, pre, input{
+      body, pre {
         background: black;
-        color: white;
+        color: #00ff00;
         font-family: Source Code Pro,Courier New,Courier,monospace;
         padding: 10px;
-      }
-
-      input {
-        color:white;
-        border: 0;
-        background: black;
-        font-family: Source Code Pro,Courier New,Courier,monospace;
         font-size: 16px;
       }
-      input:focus {
-        outline: none;
+
+      body {
+        width: 50%;
+        margin-left: 25%;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .white {
+        color: #fff;
+      }
+
+      #root {
+        position: relative;
+      }
+
+      .separate {
+        margin-right: 8px;
+      }
+
+      #command {
+        position: absolute;
+        display: inline-block;
+        color: white;
+      }
+
+      #command::after {
+        content: "";
+        position: absolute;
+        top: ;
+        right: -15px;
+        display: inline-block;
+        background-color: #00ff00;
+        vertical-align: top;
+        width: 10px;
+        height: 16px;
+        -webkit-animation: blink 1s step-end infinite;
+        animation: blink 1s step-end infinite;
+      }
+
+      @-webkit-keyframes blink {
+        0% { opacity: 1.0; }
+        50% { opacity: 0.0; }
+        100% { opacity: 1.0; }
+      }
+
+      @keyframes blink {
+        0% { opacity: 1.0; }
+        50% { opacity: 0.0; }
+        100% { opacity: 1.0; }
       }
     </style>
 </head>
@@ -35,9 +78,10 @@
   </pre>
 
   <p>root@cypherPC:~$ help</p>
-  <pre>
+  <pre class="white">
   -------------------------
   ||  TERMINAL COMMANDS  ||
+  ||    (type below)     ||
   -------------------------
 
   run cypher
@@ -45,15 +89,74 @@
   inspiration
   credits
   </pre>
-  <p>
-    root@cypherPC:~$ 
-    <input type="text" autocomplete="off" eb-caret="caretPosition">
-  </p>
+  <div id="root" class="green">
+    <span class="separate">root@cypherPC:~$</span>
+    <div id="command"></div>
+  </div>
+  <pre class="hidden white" id="credits">
+  by Evan Anderson, Sarah Babski, and Nico Hall
+
+  Sources:
+  --------
+  "Prometheus." Prometheus. Greekmythology.com, n.d. Web. 29 Nov. 2016.
+
+  Scribes, Joanne Sacred. "NUMBER 0." NUMBER 0. Blogspot.com, 01 Jan. 1970. Web. 29 Nov. 2016.
+
+  Weitzman, David. "Numbers and Their Meanings - 
+    Crystalinks." Numbers and Their Meanings - Crystalinks. Crystalinks.com, n.d. Web. 01 Dec. 2016.
+  </pre>
+
+  <pre class="hidden white" id="about">
+  Cypher is an interactive web game in the genres of neo-noir, cyberpunk, occult mystery.
+
+  It was created as a final project for a Narrative Basics class at Northeastern University in Fall 2016.
+
+  It was built with Node.js, a JavaScript runtime environment.
+
+  The code for this project is open-source and located at <a href="https://github.com/sbabski/narrative-final" target="_blank">https://github.com/sbabski/narrative-final</a>.
+  There are also instructions there on installing the project locally.
+  </pre>
+
 
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
   <script>
     $(document).ready(function() {
-      console.log('ready!');
+      var input = '';
+
+      $(document).on('keypress', function(event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if(keycode == '13') {
+          pushText();
+        } else {
+          input += String.fromCharCode(keycode);
+        }
+        $('#command').text(input);
+      });
+
+      $(document).on('keydown', function(event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if(keycode == '8') {
+          input = input.slice(0, -1);
+          $('#command').text(input);
+        }
+      });
+
+      function pushText() {
+        $('<p class="next green">root@cypherPC:~$  <span class="white">'+input+'</span></p>').insertBefore('#root');
+        if(input == 'credits') {
+          var credits = $('#credits').clone();
+          credits.removeClass('hidden');
+          credits.insertBefore('#root');
+        } else if(input == 'run cypher') {
+          window.open('http://162.243.163.42:3000/');
+        } else if(input == 'about') {
+          var about = $('#about').clone();
+          about.removeClass('hidden');
+          about.insertBefore('#root');
+        }
+        input = '';
+      }
+
     });
   </script>
 </body>
