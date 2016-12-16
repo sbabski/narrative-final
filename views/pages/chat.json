@@ -1,108 +1,111 @@
-{ "c1": [
-  {
-    "a": "Dragonfly439",
-    "m": "Hello there. We’ve been expecting you.",
-    "next": [1]
-  },
-  {
-    "a": "player",
-    "m": "What is going on here?",
-    "next": [2]
-  },
-  {
-    "a": "Dragonfly439",
-    "m": "You have found a way out of the illusion of time. Now you are witness for your race.",
-    "next": [3, 4, 5]
-  },
-  {
-    "a": "player",
-    "m": "This can’t be real. How are you doing this?",
-    "next": [7]
-  },
-  {
-    "a": "player",
-    "m": "Please leave me alone.",
-    "next": [6]
-  },
-  {
-    "a": "player",
-    "m": "Who are you?",
-    "next": [6]
-  },
-  {
-    "a": "Dragonfly439",
-    "m": "You cannot get away from your own shadow.",
-    "next": [3, 4, 5]
-  },
-  {
-    "a": "Dragonfly439",
-    "m": "But it is. This is occurring through means far beyond your Y2K world.",
-    "next": [8]
-  },
-  {
-    "a": "player",
-    "m": "But how do I know that any of this is real?",
-    "next": [9]
-  },
-  {
-    "a": "Dragonfly439",
-    "m": "Here’s a start. This man, <a href=\"/alton/mayor/altered\" target=\"_blank\">Layne Thompson</a>.",
-    "next": []
-  }
-], "c2": [   
-  {
-    "a": "Dragonfly439",
-    "m": "Ah there you are. Enjoying yourself?",
-    "next": [1]
-  },
-  {
-    "a": "player",
-    "m": "Alright stop this crap. What the hell is going on? I demand you! You think this is a game? A joke? Just a story? You think you’re so powerful? So clever? These are government matters here! You won’t be able to get away with this! They will track you down.",
-    "next": [2]
-  },
-  {
-    "a": "Dragonfly439",
-    "m": "Oh that’s good. Don’t flatter yourself or your government too much, they’re not nearly as adept as they lead their citizens to believe. Just as it is written, Hubris truly is a deadly sin. Always remember that.",
-    "next": [3, 4, 5]
-  },
-  {
-    "a": "player",
-    "m": "I could say the same of you.",
-    "next": [6]
-  },
-  {
-    "a": "player",
-    "m": "Can you at least skip the biblical?",
-    "next": [7]
-  },
-  {
-    "a": "player",
-    "m": "What do you want? What do you want me to do?",
-    "next": [8]
-  },
-  {
-    "a": "Dragonfly439",
-    "m": "Haha you are too funny. Or maybe you are even more naive than I assumed. You think you see, but your true eye has not been opened. The Sight will come.",
-    "next": [9]
-  },
-  {
-    "a": "Dragonfly439",
-    "m": "Funny. Or maybe you are even more naive than I assumed. You think you see, but your true eye has not been opened. The Sight will come.",
-    "next": [9]
-  },
-  {
-    "a": "Dragonfly439",
-    "m": "I want you to understand. To find knowledge and truth. There are many who are mislead, who only see what they want to, but not the world as it truly is.",
-    "next": [9]
-  },
-  {
-    "a": "player",
-    "m": "Okay, so how do I find this sight?",
-    "next": [10]
-  },
-  {
-    "a": "Dragonfly439",
-    "m": "<a href=\"/nonsense-next\" target=\"_blank\">Search here and within yourself. You might find that they’re not very different.</a>",
-    "next": []
-  }
-]}
+[
+  [
+    {
+      "a": "Dragonfly439",
+      "m": "Hello there. We’ve been expecting you.",
+      "next": [1]
+    },
+    {
+      "a": "player",
+      "m": "What is going on here?",
+      "next": [2]
+    },
+    {
+      "a": "Dragonfly439",
+      "m": "You have found a way out of the illusion of time. Now you are witness for your race.",
+      "next": [3, 4, 5]
+    },
+    {
+      "a": "player",
+      "m": "This can’t be real. How are you doing this?",
+      "next": [7]
+    },
+    {
+      "a": "player",
+      "m": "Please leave me alone.",
+      "next": [6]
+    },
+    {
+      "a": "player",
+      "m": "Who are you?",
+      "next": [6]
+    },
+    {
+      "a": "Dragonfly439",
+      "m": "You cannot get away from your own shadow.",
+      "next": [3, 4, 5]
+    },
+    {
+      "a": "Dragonfly439",
+      "m": "But it is. This is occurring through means far beyond your Y2K world.",
+      "next": [8]
+    },
+    {
+      "a": "player",
+      "m": "But how do I know that any of this is real?",
+      "next": [9]
+    },
+    {
+      "a": "Dragonfly439",
+      "m": "Here’s a start. This man, <a href=\"/alton/mayor/altered\" target=\"_blank\">Layne Thompson</a>.",
+      "next": []
+    }
+  ],
+  [
+    {
+      "a": "Dragonfly439",
+      "m": "Ah there you are. Enjoying yourself?",
+      "next": [1]
+    },
+    {
+      "a": "player",
+      "m": "Alright stop this crap. What the hell is going on? I demand you! You think this is a game? A joke? Just a story? You think you’re so powerful? So clever? These are government matters here! You won’t be able to get away with this! They will track you down.",
+      "next": [2]
+    },
+    {
+      "a": "Dragonfly439",
+      "m": "Oh that’s good. Don’t flatter yourself or your government too much, they’re not nearly as adept as they lead their citizens to believe. Just as it is written, Hubris truly is a deadly sin. Always remember that.",
+      "next": [3, 4, 5]
+    },
+    {
+      "a": "player",
+      "m": "I could say the same of you.",
+      "next": [6]
+    },
+    {
+      "a": "player",
+      "m": "Can you at least skip the biblical?",
+      "next": [7]
+    },
+    {
+      "a": "player",
+      "m": "What do you want? What do you want me to do?",
+      "next": [8]
+    },
+    {
+      "a": "Dragonfly439",
+      "m": "Haha you are too funny. Or maybe you are even more naive than I assumed. You think you see, but your true eye has not been opened. The Sight will come.",
+      "next": [9]
+    },
+    {
+      "a": "Dragonfly439",
+      "m": "Funny. Or maybe you are even more naive than I assumed. You think you see, but your true eye has not been opened. The Sight will come.",
+      "next": [9]
+    },
+    {
+      "a": "Dragonfly439",
+      "m": "I want you to understand. To find knowledge and truth. There are many who are mislead, who only see what they want to, but not the world as it truly is.",
+      "next": [9]
+    },
+    {
+      "a": "player",
+      "m": "Okay, so how do I find this sight?",
+      "next": [10]
+    },
+    {
+      "a": "Dragonfly439",
+      "m": "<a href=\"/nonsense-next\" target=\"_blank\">Search here and within yourself. You might find that they’re not very different.</a>",
+      "next": []
+    }
+  ]
+]
