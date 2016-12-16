@@ -3,24 +3,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('client-sessions');
 const dialogue = require('dialoguejs');
+//values for when canvas width is 1000
 const shapeData = require('shapes.json');
 const app = express();
 var db, currentUser, users;
-
-//values for when canvas width is 1000
-
-console.log(shapeData);
-var shapeDict = [
-  {'autopsy': {'url': '/autopsy-report', 'shape': [650, 225, 325, 70]}, 
-  'alton': {'url': '/alton', 'shape': [40, 140, 120, 80]},
-  'anarchy': {'url': '/agitator/attack', 'shape': [425, 285, 65, 70]},
-  'abandon': {'url': '/dives-dead', 'shape': [125, 430, 120, 60]}},
-  {'american': {'url': '/american', 'shape': [595, 300, 115, 60]},
-  'anarchy': {'url': '/agitator/harbor', 'shape': [425, 285, 65, 70]},
-  'nonsense': {'url': '/nonsense', 'shape': [230, 455, 140, 85]},
-  'numerology': {'url': '/numerology', 'shape': [40, 240, 75, 75]},
-  'myth': {'url': '/myth', 'shape': [715, 450, 100, 70]}}
-];
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -246,6 +232,14 @@ app.get('/american', requireLogin, (req, res) => {
     testvar: 'hi'
   });
 });
+
+//act iii
+
+app.get('/fbi-confidential', requireLogin, (req, res) => {
+  res.render('pages/force');
+});
+
+//act iv
 
 app.get('/nonsense', requireLogin, (req, res) => {
   var convo;

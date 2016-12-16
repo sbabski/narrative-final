@@ -135,6 +135,41 @@ audio {
 }
 
 .final {
+  position: relative;
   background-color: black;
   color: white;
+}
+
+.force {
+  background-color: #eee;
+  margin: 0;
+}
+
+.force .doc-wrapper {
+  display:block;
+  margin: 0 auto;
+  max-width: 1080px;
+}
+
+.force .doc {
+  margin: 5rem;
+  padding: 7.5rem;
+  background-color: #fff;
+  box-shadow: 0 0 5px 2px #ddd;
+  text-align: center;
+}
+
+.force .doc p {
+  text-align: justify;
+}
+
+.force .doc img {
+  display: block;
+  margin: 0 auto 2rem auto;
+}
+
+.force .doc .sign {
+  font-family: 'Meddon', sans-serif;
+  text-align: left;
+  margin: 0;
 }
