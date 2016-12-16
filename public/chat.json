@@ -1,4 +1,4 @@
-{ "c1": [
+[[
   {
     "a": "Dragonfly439",
     "m": "Hello there. We’ve been expecting you.",
@@ -49,7 +49,7 @@
     "m": "Here’s a start. This man, <a href=\"/alton/mayor/altered\" target=\"_blank\">Layne Thompson</a>.",
     "next": []
   }
-], "c2": [   
+], [   
   {
     "a": "Dragonfly439",
     "m": "Ah there you are. Enjoying yourself?",
@@ -105,4 +105,4 @@
     "m": "<a href=\"/nonsense-next\" target=\"_blank\">Search here and within yourself. You might find that they’re not very different.</a>",
     "next": []
   }
-]}
+]]

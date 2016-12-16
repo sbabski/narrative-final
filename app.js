@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const session = require('client-sessions');
 const dialogue = require('dialoguejs');
 //values for when canvas width is 1000
-const shapeData = require('shapes.json');
+const shapeData = require('./public/shapes.json');
 const app = express();
 var db, currentUser, users;
 
@@ -288,8 +288,8 @@ function requireLogin(req, res, next) {
 
 function buildRevisedShapes(u) {
   var shapes = {};
-  Object.keys(shapeDict[u.act-1]).forEach(function(key, value) {
-    shapes[key] = shapeDict[u.act-1][key];
+  Object.keys(shapeData[u.act-1]).forEach(function(key, value) {
+    shapes[key] = shapeData[u.act-1][key];
   });
   if(u.act == 1 && !u.act1pt2) {
     delete shapes.anarchy;
