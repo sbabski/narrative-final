@@ -55,6 +55,10 @@
         }
       });
     });
+    console.log('here')
+    $.getJSON('chat.json', function(response) {
+      console.lot(response.property);
+    });
   </script>
 </body>
 </html>
