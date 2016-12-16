@@ -241,7 +241,7 @@ app.get('/seized-domain', requireLogin, (req, res) => {
   res.render('pages/seized');
 });
 
-app.get('/thompson', reqireLogin, (req, res) => {
+app.get('/thompson', requireLogin, (req, res) => {
   res.render('pages/thompson');
 });
 
