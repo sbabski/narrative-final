@@ -190,7 +190,7 @@ app.get('/agitator/:article', requireLogin, (req, res) => {
       convo = true;
     }
   } else if (article == 'harbor') {
-    if(!0req.user.harbor) {
+    if(!req.user.harbor) {
       updateUserData(req.user.name, {harbor: true}, unlockAct2Nonsense);
     }
     convo = null;
