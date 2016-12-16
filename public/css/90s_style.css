@@ -2,14 +2,26 @@ body {
   font-family: Times, serif;
   font-size: 14px;
 }
+
 .report {
   font-family: "Courier New", Courier, monospace;
   font-size: 13px;
   margin: auto 1rem;
 }
+
 .centered {
   text-align: center;
 }
+
+.alter {
+  text-transform: uppercase;
+  color: #93c47d;
+}
+
+.cross {
+  text-decoration: line-through;
+}
+
 .head {
   font-size: 16px;
   font-weight: bold;
@@ -172,15 +184,6 @@ footer a {
 
 .alton .left {
   text-align: left;
-}
-
-.alton .alter {
-  text-transform: uppercase;
-  color: #93c47d;
-}
-
-.alton .cross {
-  text-decoration: line-through;
 }
 
 p.caption {

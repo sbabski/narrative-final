@@ -133,10 +133,11 @@ app.get('/autopsy-report', requireLogin, (req, res) => {
   if(!req.user.autopsy) {
     updateUserData(req.user.name, {autopsy: true}, unlockAct1Future);
   }
-  res.render('pages/autopsy-report');
+  res.render('pages/autopsy-report', {
+    altered: true
+  });
 });
 
-//subpage from /autopsy-report
 app.get('/myositis', requireLogin, (req, res) => {
   res.render('pages/myositis');
 });
