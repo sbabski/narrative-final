@@ -107,7 +107,9 @@ app.get('/logout', (req, res) => {
 });
 
 app.get('/reset', requireLogin, (req, res) => {
-  updateUserData(req.user.name, blankUser())
+  var data = {};
+  blankUser(data);
+  updateUserData(req.user.name, data);
   res.redirect('/');
 });
 
@@ -307,7 +309,6 @@ function newUser(data, cb) {
 }
 
 function blankUser(data) {
-  if(!data) data = {};
   data.act = 1;
   data.autopsy = false;
   data.alton = false;
