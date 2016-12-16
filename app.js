@@ -190,11 +190,17 @@ app.get('/agitator/:article', requireLogin, (req, res) => {
       convo = true;
     }
   } else if (article == 'harbor') {
-    if(!req.user.harbor) {
+    if(!0req.user.harbor) {
       updateUserData(req.user.name, {harbor: true}, unlockAct2Nonsense);
     }
     convo = null;
     date = 'Dec. 13, 2037';
+  } else if (article == 'exposed') {
+    if(!req.user.exposed) {
+      updateUserData(req.user.name, {exposed: true});
+    }
+    convo = null;
+    date = 'Dec. 21, 2037';
   } else {
     return res.redirect('/');
   }
@@ -319,6 +325,7 @@ function blankUser(data) {
   data.american = false;
   data.harbor = false;
   data.act2pt3 = false;
+  data.exposed = false;
   data.convo = [
     {'id': 1, 'start': false, 'end': false},
     {'id': 2, 'start': false, 'end': false}
