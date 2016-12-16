@@ -42,7 +42,7 @@
       #command::after {
         content: "";
         position: absolute;
-        top: ;
+        top: 0;
         right: -15px;
         display: inline-block;
         background-color: #00ff00;
@@ -117,6 +117,11 @@
   There are also instructions there on installing the project locally.
   </pre>
 
+  <pre class="hidden white" id="inspiration">
+  Cypher was inspired by the case of Ricky McCormick, a 1999 murder victim who left behind
+  a series of encrypted notes. They have not been deciphered, even to this day. 
+  </pre>
+
 
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
   <script>
@@ -143,18 +148,30 @@
 
       function pushText() {
         $('<p class="next green">root@cypherPC:~$  <span class="white">'+input+'</span></p>').insertBefore('#root');
-        if(input == 'credits') {
-          var credits = $('#credits').clone();
-          credits.removeClass('hidden');
-          credits.insertBefore('#root');
-        } else if(input == 'run cypher') {
-          window.open('http://162.243.163.42:3000/');
-        } else if(input == 'about') {
-          var about = $('#about').clone();
-          about.removeClass('hidden');
-          about.insertBefore('#root');
+        switch(input) {
+          case 'credits':
+            var credits = $('#credits').clone();
+            credits.removeClass('hidden');
+            credits.insertBefore('#root');
+            break;
+          case 'run cypher':
+            window.open('http://162.243.163.42:3000/');
+            break;
+          case 'inspiration':
+            insertContent('#inspiration');
+            break;
+          case 'about':
+            insertContent('#about');
+            break;
+          default: break;
         }
         input = '';
+      }
+
+      function insertContent(selector) {
+        var elem = $(selector).clone();
+        elem.removeClass('hidden');
+        elem.insertBefore('#root');
       }
 
     });
