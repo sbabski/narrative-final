@@ -53,6 +53,10 @@ MongoClient.connect('mongodb://localhost:27017/', (err, database) => {
 
 /*------------- Routes ---------------*/
 
+app.get('/test', (req, res) => {
+  res.render('pages/test');
+});
+
 app.get('/', requireLogin, (req, res) => {
   if(req.user.act == 4){
     res.render('pages/end');
