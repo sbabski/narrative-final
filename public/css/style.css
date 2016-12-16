@@ -173,3 +173,15 @@ audio {
   text-align: left;
   margin: 0;
 }
+
+.seized {
+  background-color: #ccc;
+  margin: 0;
+}
+
+.seized img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}

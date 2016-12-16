@@ -107,5 +107,92 @@
       "m": "<a href=\"/nonsense-next\" target=\"_blank\">Search here and within yourself. You might find that they’re not very different.</a>",
       "next": []
     }
+  ],
+  [
+    {
+      "a": "Dragonfly439",
+      "m": "Well look at you! You’ve almost discovered the buried treasure! X Marks the spot!",
+      "next": [1]
+    },
+    {
+      "a": "player",
+      "m": "Enough! Am I really switching between times periods? 2037? How is that possible?!",
+      "next": [2]
+    },
+    {
+      "a": "Dragonfly439",
+      "m": "I’ve told you time and time again these are matters far beyond your understanding and technological capabilities of 1999. They are far beyond those of 2037 as well. They are so far beyond that they transcend technology. They are essentially organic.",
+      "next": [3]
+    },
+   {
+      "a": "player",
+      "m": "Seriously, enough with the pseudo-mystical shit. I am here to find who killed Ray Morgan and thats it! I don’t want to get dragged into this rabbit hole any further.",
+      "next": [4]
+    },
+    {
+      "a": "Dragonfly439",
+      "m": "That is what I am here to show you. Anyway isn’t it obvious already?",
+      "next": [5, 6, 7]
+    },
+    {
+      "a": "player",
+      "m": "I don't want to believe it.",
+      "next": [8]
+    },
+        {
+      "a": "player",
+      "m": "I don't believe it.",
+      "next": [9]
+    },
+    {
+      "a": "player",
+      "m": "So it's all true.",
+      "next": [10]
+    },
+    {
+      "a": "Dragonfly439",
+      "m": "Good. Never blindly accept until you can put your hand into the wound. Are you ready to do so?",
+      "next": [13, 14]
+    },
+   {
+      "a": "Dragonfly439",
+      "m": "Good. That’s a virtue. The skeptic is the one who wins in the end. Never blindly accept until you can put your hand into the wound. Yet I at least need you to have faith in yourself moving forward. Can you have that?",
+      "next": [11, 12]
+    },
+    {
+      "a": "Dragonfly439",
+      "m": "Reality is not just stranger than we imagine. Its stranger than we can imagine. You’re ready to take the plunge?",
+      "next": [13, 14]
+    },
+    {
+      "a": "player",
+      "m": "Yes.",
+      "next": [10]
+    },
+        {
+      "a": "player",
+      "m": "No.",
+      "next": [15]
+    },
+    {
+      "a": "player",
+      "m": "Yes, let's get this over with.",
+      "next": [15]
+    },
+    {
+      "a": "player",
+      "m": "No.",
+      "next": [16]
+    },
+   {
+      "a": "Dragonfly439",
+      "m": "<a href=\"/\" target=\"_blank\">Well I hope, for your sake, that you are strong.</a>",
+      "next": []
+    },
+    {
+      "a": "Dragonfly439",
+      "m": "<a href=\"/alton/mayor/altered\" target=\"_blank\">Hmm.... Too bad.</a>",
+      "next": []
+    }
   ]
 ]

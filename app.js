@@ -228,15 +228,21 @@ app.get('/american', requireLogin, (req, res) => {
   if(!req.user.american) {
     updateUserData(req.user.name, {american: true}, unlockAct2Nonsense);
   }
-  res.render('pages/american', {
-    testvar: 'hi'
-  });
+  res.render('pages/american');
 });
 
 //act iii
 
 app.get('/fbi-confidential', requireLogin, (req, res) => {
   res.render('pages/force');
+});
+
+app.get('/seized-domain', requireLogin, (req, res) => {
+  res.render('pages/seized');
+});
+
+app.get('/thompson', reqireLogin, (req, res) => {
+  res.render('pages/thompson');
 });
 
 //act iv
